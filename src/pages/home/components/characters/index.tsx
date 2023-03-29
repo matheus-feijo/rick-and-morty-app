@@ -140,13 +140,19 @@ export function Characters({
         }}
       >
         <ButtonPagination
-          onClick={handleChangePrevList}
+          onClick={(e) => {
+            e.preventDefault();
+            handleChangePrevList();
+          }}
           disabled={!characterList.items.info?.prev}
         >
           Previous
         </ButtonPagination>
         <ButtonPagination
-          onClick={handleChangeNextList}
+          onClick={(e) => {
+            e.preventDefault();
+            handleChangeNextList();
+          }}
           disabled={!characterList.items.info?.next}
         >
           Next

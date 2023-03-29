@@ -9,7 +9,7 @@ import { characterAction } from "../../store/actions/characterAction";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAction";
 import { Navbar } from "../../components/Navbar";
-import { TitlePage } from "./styled";
+import logo from "../../assets/rick-and-morty.png";
 
 export function Home() {
   const [pageSelect, setPageSelect] = useState("");
@@ -116,13 +116,8 @@ export function Home() {
     >
       <Navbar />
 
-      <div
-        style={{
-          textAlign: "center",
-          paddingTop: 50,
-        }}
-      >
-        <TitlePage>Personagens</TitlePage>
+      <div style={{ textAlign: "center", paddingTop: 50 }}>
+        <img src={logo} style={{ width: "35vh" }} alt="logo" />
       </div>
 
       <Filter handleChangeFilter={handleChangeFilter} />
@@ -135,7 +130,7 @@ export function Home() {
       )}
 
       <div>
-        <p style={{ paddingLeft: "2%" }}>
+        <p style={{ paddingLeft: "2%", color: "#FFFF" }}>
           Filtros Aplicados: {filtro.name && "name"} {filtro.gender && "gender"}{" "}
           {filtro.species && "species"}
           {filtro.status && "status"} {filtro.type && "type"}

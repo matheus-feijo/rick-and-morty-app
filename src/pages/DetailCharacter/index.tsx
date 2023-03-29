@@ -75,7 +75,7 @@ export function DetailCharacter() {
         />
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <div style={{ fontSize: 28 }}>
+        <div style={{ fontSize: 28, color: "#FFFF" }}>
           <p>Name: {data?.name}</p>
           <p>Gender: {data?.gender}</p>
           <p>Species: {data?.species}</p>
