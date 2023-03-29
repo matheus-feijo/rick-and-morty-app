@@ -1,7 +1,7 @@
 import { createAction } from "@reduxjs/toolkit";
 
 const addFavoriteCharacter = createAction(
-  "FAVORITE_CHARACTERS/addFavoriteCharacter",
+  "FAVORITE_CHARACTER/addFavoriteCharacter",
   (character) => ({
     payload: { character },
   })

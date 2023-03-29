@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCharacters } from "../../store/reducers/characterSlice";
 import { api } from "../../services/api";
 import { characterAction } from "../../store/actions/characterAction";
+import { ICharacter } from "../../interfaces/ICharacter";
+import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAction";
 
 export function Home() {
   const [pageSelect, setPageSelect] = useState("");
@@ -20,6 +22,8 @@ export function Home() {
   const characterList = useSelector(getCharacters);
   const appDispatch = useDispatch();
   const { addCharacters } = characterAction;
+  const { addFavoriteCharacter, removeFavoriteCharacter } =
+    favoriteCharacterAction;
 
   const handleChangeNextList = () => {
     if (characterList.items.info?.next) {
@@ -79,6 +83,17 @@ export function Home() {
     });
   };
 
+  const handleFavoriteCharacter = (character: ICharacter, action: string) => {
+    if (action === "FAVORITAR") {
+      appDispatch(addFavoriteCharacter(character));
+      return;
+    }
+
+    if (action === "DESFAVORITAR") {
+      appDispatch(removeFavoriteCharacter(character.id));
+    }
+  };
+
   return (
     <div
       style={{
@@ -96,6 +111,7 @@ export function Home() {
         pageSelect={pageSelect}
         handleChangeNextList={handleChangeNextList}
         handleChangePrevList={handleChangePrevList}
+        handleFavoriteCharacter={handleFavoriteCharacter}
       />
     </div>
   );

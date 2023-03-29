@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "..";
 import { ICharacter } from "../../interfaces/ICharacter";
 
 interface IFavoriteCharacterSlice {
@@ -29,3 +30,12 @@ const favoriteCharacterSlice = createSlice({
 });
 
 export default favoriteCharacterSlice.reducer;
+
+export const getFavoriteCharactersId = (state: RootState) => {
+  const ids = state.favoriteCharacters.items.map((character) => character.id);
+
+  return ids;
+};
+
+export const getAllFavoriteCharacters = (state: RootState) =>
+  state.favoriteCharacters.items;

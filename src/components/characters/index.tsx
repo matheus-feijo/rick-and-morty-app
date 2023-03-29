@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCharacters } from "../../store/reducers/characterSlice";
 import { characterAction } from "../../store/actions/characterAction";
+import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";
 
 interface ICharacterAPI {
   info: IDadosCharacters;
@@ -16,13 +17,16 @@ export function Characters({
   pageSelect,
   handleChangeNextList,
   handleChangePrevList,
+  handleFavoriteCharacter,
 }: {
   pageSelect: string;
   handleChangeNextList: () => void;
   handleChangePrevList: () => void;
+  handleFavoriteCharacter: (character: ICharacter, action: string) => void;
 }) {
   const appDispatch = useDispatch();
   const characterList = useSelector(getCharacters);
+  const idsFavoriteCharacter = useSelector(getFavoriteCharactersId);
   const { addCharacters } = characterAction;
 
   const { status, data, refetch } = useQuery<ICharacterAPI, unknown>({
@@ -70,7 +74,24 @@ export function Characters({
               >
                 {character.name}
               </button>
-              <button>Favoritar</button>
+
+              {idsFavoriteCharacter.includes(character.id) ? (
+                <button
+                  onClick={() =>
+                    handleFavoriteCharacter(character, "DESFAVORITAR")
+                  }
+                >
+                  Favoritado
+                </button>
+              ) : (
+                <button
+                  onClick={() =>
+                    handleFavoriteCharacter(character, "FAVORITAR")
+                  }
+                >
+                  Favoritar
+                </button>
+              )}
             </div>
           );
         })}
