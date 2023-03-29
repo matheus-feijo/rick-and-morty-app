@@ -35,13 +35,13 @@ export function Filter({
 
   return (
     <div style={{ padding: "50px 0px 20px 50px" }}>
-      <Tooltip title="Filter">
-        <button
+      <Tooltip title="Filtro">
+        <Button
           onClick={showDrawer}
-          style={{ cursor: "pointer", borderRadius: 8 }}
+          style={{ cursor: "pointer", borderRadius: 8, height: 42 }}
         >
           <Funnel size={32} />
-        </button>
+        </Button>
       </Tooltip>
 
       <Form
