@@ -14,6 +14,7 @@ import { Navbar } from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { Filter } from "../../components/Filter";
 import { IFilter } from "../../interfaces/IFilter";
+import { TitlePage } from "../home/styled";
 
 export function Favorites() {
   const favoriteCharacterList = useSelector(getAllFavoriteCharacters);
@@ -32,27 +33,9 @@ export function Favorites() {
   return (
     <div>
       <Navbar />
-      <div style={{ padding: "20px 0px 0px 20px" }}>
-        <button
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            padding: 5,
-            backgroundColor: "#ffff",
-            border: "none",
-            borderRadius: 8,
-            cursor: "pointer",
-          }}
-          onClick={() => history.go(-1)}
-        >
-          {" "}
-          <ArrowLeft size={32} /> Voltar
-        </button>
-      </div>
 
-      <div style={{ textAlign: "center", color: "#FFFF", fontSize: 28 }}>
-        <h1>Favoritos</h1>
+      <div style={{ textAlign: "center", paddingTop: 50 }}>
+        <TitlePage>Favoritos</TitlePage>
       </div>
 
       <div>

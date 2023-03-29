@@ -20,3 +20,11 @@ export const ButtonPagination = styled.button`
   padding: 5px;
   cursor: pointer;
 `;
+
+export const ImageCharacter = styled.img`
+  cursor: pointer;
+  @media (max-width: 400px) {
+    width: 150px;
+    height: 150px;
+  }
+`;

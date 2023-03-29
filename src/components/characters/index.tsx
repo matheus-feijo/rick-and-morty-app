@@ -7,9 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCharacters } from "../../store/reducers/characterSlice";
 import { characterAction } from "../../store/actions/characterAction";
 import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";
-import { ButtonPagination, CardCharacter, ContainerCards } from "./styled";
+import {
+  ButtonPagination,
+  CardCharacter,
+  ContainerCards,
+  ImageCharacter,
+} from "./styled";
 import { Heart } from "@phosphor-icons/react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface ICharacterAPI {
   info: IDadosCharacters;
@@ -50,7 +55,15 @@ export function Characters({
   }
 
   if (status === "loading") {
-    return <p>cARREGANDO</p>;
+    return (
+      <div
+        style={{
+          marginTop: 50,
+        }}
+      >
+        Carregando...
+      </div>
+    );
   }
 
   return (
@@ -68,12 +81,10 @@ export function Characters({
           return (
             <ContainerCards key={character.id}>
               <CardCharacter>
-                <img
+                <ImageCharacter
                   src={character.image}
                   alt={character.name}
-                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    // console.log(character);
                     navigate(`/character/${character.id}`);
                   }}
                 />

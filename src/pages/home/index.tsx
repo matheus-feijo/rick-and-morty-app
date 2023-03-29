@@ -9,6 +9,7 @@ import { characterAction } from "../../store/actions/characterAction";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAction";
 import { Navbar } from "../../components/Navbar";
+import { TitlePage } from "./styled";
 
 export function Home() {
   const [pageSelect, setPageSelect] = useState("");
@@ -118,12 +119,10 @@ export function Home() {
       <div
         style={{
           textAlign: "center",
-          color: "#FFFF",
-          fontSize: 28,
           paddingTop: 50,
         }}
       >
-        <h1>Personagens</h1>
+        <TitlePage>Personagens</TitlePage>
       </div>
 
       <Filter handleChangeFilter={handleChangeFilter} />
