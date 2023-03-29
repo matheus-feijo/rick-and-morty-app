@@ -73,7 +73,7 @@ export function Characters({
                   alt={character.name}
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    console.log(character);
+                    // console.log(character);
                     navigate(`/character/${character.id}`);
                   }}
                 />

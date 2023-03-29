@@ -40,7 +40,7 @@ export function Favorites() {
             borderRadius: 8,
             cursor: "pointer",
           }}
-          onClick={() => navigate("/")}
+          onClick={() => history.go(-1)}
         >
           {" "}
           <ArrowLeft size={32} /> Voltar
@@ -65,7 +65,7 @@ export function Favorites() {
                   alt={character.name}
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    console.log(character);
+                    // console.log(character);
                     navigate(`/character/${character.id}`);
                   }}
                 />

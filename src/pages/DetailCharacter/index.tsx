@@ -1,20 +1,19 @@
 import { ArrowLeft } from "@phosphor-icons/react";
 import { useQuery } from "react-query";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Navbar } from "../../components/Navbar";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { api } from "../../services/api";
+import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";
 
 export function DetailCharacter() {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const idsFavoriteCharacterList = useSelector(getFavoriteCharactersId);
 
   const { data, status } = useQuery<ICharacter, unknown>({
     queryKey: "single-character",
     queryFn: () => api.get(`/character/${id}`).then((res) => res.data),
-    onSuccess: (data) => {
-      console.log(data);
-    },
   });
 
   if (status === "loading") {
@@ -22,7 +21,27 @@ export function DetailCharacter() {
   }
 
   if (status === "error") {
-    return <button> Voltar</button>;
+    return (
+      <div style={{ padding: "20px 0px 0px 20px" }}>
+        <Navbar />
+        <button
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            padding: 5,
+            backgroundColor: "#ffff",
+            border: "none",
+            borderRadius: 8,
+            cursor: "pointer",
+          }}
+          onClick={() => history.go(-1)}
+        >
+          {" "}
+          <ArrowLeft size={32} /> Voltar
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -41,7 +60,7 @@ export function DetailCharacter() {
             borderRadius: 8,
             cursor: "pointer",
           }}
-          onClick={() => navigate("/")}
+          onClick={() => history.go(-1)}
         >
           {" "}
           <ArrowLeft size={32} /> Voltar
@@ -62,6 +81,12 @@ export function DetailCharacter() {
           <p>Species: {data?.species}</p>
           <p>Status: {data?.status}</p>
           <p>Type: {data?.type}</p>
+          <p>
+            Favorited:{" "}
+            {idsFavoriteCharacterList.includes(data?.id || -1)
+              ? "True"
+              : "False"}
+          </p>
         </div>
       </div>
     </div>
