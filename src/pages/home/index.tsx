@@ -8,6 +8,7 @@ import { api } from "../../services/api";
 import { characterAction } from "../../store/actions/characterAction";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAction";
+import { Navbar } from "../../components/Navbar";
 
 export function Home() {
   const [pageSelect, setPageSelect] = useState("");
@@ -97,11 +98,12 @@ export function Home() {
   return (
     <div
       style={{
-        height: "100vh",
+        minHeight: "100vh",
         width: "100%",
-        backgroundColor: "rgba(59,201,217,0.7)",
       }}
     >
+      <Navbar />
+
       <Filter
         handleChangeFilter={handleChangeFilter}
         handleRemoveFilter={handleRemoveFilter}

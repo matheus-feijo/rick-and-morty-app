@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCharacters } from "../../store/reducers/characterSlice";
 import { characterAction } from "../../store/actions/characterAction";
 import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";
+import { ButtonPagination, CardCharacter, ContainerCards } from "./styled";
+import { Heart } from "@phosphor-icons/react";
 
 interface ICharacterAPI {
   info: IDadosCharacters;
@@ -56,43 +58,61 @@ export function Characters({
           display: "flex",
           gap: 20,
           flexWrap: "wrap",
+          justifyContent: "center",
+          marginTop: 50,
         }}
       >
         {characterList.items.results.map((character) => {
           return (
-            <div
-              key={character.id}
-              style={{ display: "flex", flexDirection: "column", gap: 5 }}
-            >
-              <button
-                style={{
-                  width: 100,
-                  height: 100,
-                  padding: 5,
-                  cursor: "pointer",
-                }}
-              >
-                {character.name}
-              </button>
+            <ContainerCards key={character.id}>
+              <CardCharacter>
+                <img
+                  src={character.image}
+                  alt={character.name}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    console.log(character);
+                  }}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 5,
+                  }}
+                >
+                  <h4>
+                    <b>{character.name}</b>
+                  </h4>
 
-              {idsFavoriteCharacter.includes(character.id) ? (
-                <button
-                  onClick={() =>
-                    handleFavoriteCharacter(character, "DESFAVORITAR")
-                  }
-                >
-                  Favoritado
-                </button>
-              ) : (
-                <button
-                  onClick={() =>
-                    handleFavoriteCharacter(character, "FAVORITAR")
-                  }
-                >
-                  Favoritar
-                </button>
-              )}
-            </div>
+                  <button
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      if (idsFavoriteCharacter.includes(character.id)) {
+                        handleFavoriteCharacter(character, "DESFAVORITAR");
+                      } else {
+                        handleFavoriteCharacter(character, "FAVORITAR");
+                      }
+                    }}
+                  >
+                    <Heart
+                      size={32}
+                      color="#b4211f"
+                      weight={
+                        idsFavoriteCharacter.includes(character.id)
+                          ? "fill"
+                          : "regular"
+                      }
+                    />
+                  </button>
+                </div>
+              </CardCharacter>
+            </ContainerCards>
           );
         })}
       </div>
@@ -102,31 +122,13 @@ export function Characters({
           display: "flex",
           gap: 10,
           justifyContent: "end",
-          padding: "50px 50px 0px 0px",
+          padding: "50px 25px 25px",
         }}
       >
-        <button
-          onClick={handleChangePrevList}
-          style={{
-            width: 100,
-            height: 35,
-            padding: 5,
-            cursor: "pointer",
-          }}
-        >
+        <ButtonPagination onClick={handleChangePrevList}>
           Previous
-        </button>
-        <button
-          onClick={handleChangeNextList}
-          style={{
-            width: 100,
-            height: 35,
-            padding: 5,
-            cursor: "pointer",
-          }}
-        >
-          Next
-        </button>
+        </ButtonPagination>
+        <ButtonPagination onClick={handleChangeNextList}>Next</ButtonPagination>
       </div>
     </div>
   );
