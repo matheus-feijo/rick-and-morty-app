@@ -2,12 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   CardCharacter,
   ContainerCards,
-} from "../../components/characters/styled";
+} from "../home/components/characters/styled";
 import {
   getAllFavoriteCharacters,
   getFavoriteCharactersId,
 } from "../../store/reducers/favoriteCharacterSlice";
-import { ArrowLeft, Heart } from "@phosphor-icons/react";
+import { Heart } from "@phosphor-icons/react";
 import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAction";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { Navbar } from "../../components/Navbar";

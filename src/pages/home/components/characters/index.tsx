@@ -1,12 +1,12 @@
 import { useQuery } from "react-query";
-import { ICharacter } from "../../interfaces/ICharacter";
-import { IDadosCharacters } from "../../interfaces/IDadosCharacters";
-import { api } from "../../services/api";
+import { ICharacter } from "../../../../interfaces/ICharacter";
+import { IDadosCharacters } from "../../../../interfaces/IDadosCharacters";
+import { api } from "../../../../services/api";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCharacters } from "../../store/reducers/characterSlice";
-import { characterAction } from "../../store/actions/characterAction";
-import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";
+import { getCharacters } from "../../../../store/reducers/characterSlice";
+import { characterAction } from "../../../../store/actions/characterAction";
+import { getFavoriteCharactersId } from "../../../../store/reducers/favoriteCharacterSlice";
 import {
   ButtonPagination,
   CardCharacter,

@@ -1,4 +1,4 @@
-import { Characters } from "../../components/characters";
+import { Characters } from "./components/characters";
 import { Filter } from "../../components/Filter";
 import { useState } from "react";
 import { IFilter } from "../../interfaces/IFilter";
