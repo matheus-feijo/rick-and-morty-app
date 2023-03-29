@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export function Navbar() {
+  const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -10,9 +14,8 @@ export function Navbar() {
         display: "flex",
       }}
     >
-      <p>Favoritos</p>
-      <p>Filtrar</p>
-      <p>Home</p>
+      <button onClick={() => navigate("/favorites")}>Favoritos</button>
+      <button onClick={() => navigate("/")}>Home</button>
     </div>
   );
 }

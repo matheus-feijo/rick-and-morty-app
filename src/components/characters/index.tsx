@@ -9,6 +9,7 @@ import { characterAction } from "../../store/actions/characterAction";
 import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";
 import { ButtonPagination, CardCharacter, ContainerCards } from "./styled";
 import { Heart } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
 
 interface ICharacterAPI {
   info: IDadosCharacters;
@@ -29,6 +30,7 @@ export function Characters({
   const appDispatch = useDispatch();
   const characterList = useSelector(getCharacters);
   const idsFavoriteCharacter = useSelector(getFavoriteCharactersId);
+  const navigate = useNavigate();
   const { addCharacters } = characterAction;
 
   const { status, data, refetch } = useQuery<ICharacterAPI, unknown>({
@@ -52,7 +54,7 @@ export function Characters({
   }
 
   return (
-    <div>
+    <>
       <div
         style={{
           display: "flex",
@@ -72,6 +74,7 @@ export function Characters({
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     console.log(character);
+                    navigate(`/character/${character.id}`);
                   }}
                 />
                 <div
@@ -125,11 +128,19 @@ export function Characters({
           padding: "50px 25px 25px",
         }}
       >
-        <ButtonPagination onClick={handleChangePrevList}>
+        <ButtonPagination
+          onClick={handleChangePrevList}
+          disabled={!characterList.items.info?.prev}
+        >
           Previous
         </ButtonPagination>
-        <ButtonPagination onClick={handleChangeNextList}>Next</ButtonPagination>
+        <ButtonPagination
+          onClick={handleChangeNextList}
+          disabled={!characterList.items.info?.next}
+        >
+          Next
+        </ButtonPagination>
       </div>
-    </div>
+    </>
   );
 }

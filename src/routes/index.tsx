@@ -1,13 +1,16 @@
-import { Route } from "react-router";
-import { BrowserRouter } from "react-router-dom";
 import { Home } from "../pages/home";
-import { Favorites } from "../pages/home/favorites";
+import { Favorites } from "../pages/favorites";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { DetailCharacter } from "../pages/DetailCharacter";
 
 export function Routers() {
   return (
     <BrowserRouter>
-      <Route path="/" element={<Home />} />
-      <Route path="/favorites" element={<Favorites />} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/character/:id" element={<DetailCharacter />} />
+      </Routes>
     </BrowserRouter>
   );
 }

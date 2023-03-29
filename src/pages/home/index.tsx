@@ -30,12 +30,20 @@ export function Home() {
     if (characterList.items.info?.next) {
       setPageSelect(characterList.items.info.next.slice(42));
     }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const handleChangePrevList = () => {
     if (characterList.items.info?.prev) {
       setPageSelect(characterList.items.info?.prev.slice(42));
     }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const handleChangeFilter = async (filtro: IFilter) => {
