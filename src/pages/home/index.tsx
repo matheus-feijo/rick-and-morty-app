@@ -112,11 +112,23 @@ export function Home() {
     >
       <Navbar />
 
-      <Filter
-        handleChangeFilter={handleChangeFilter}
-        handleRemoveFilter={handleRemoveFilter}
-        filtro={filtro}
-      />
+      <Filter handleChangeFilter={handleChangeFilter} />
+      {(filtro.name ||
+        filtro.gender ||
+        filtro.species ||
+        filtro.status ||
+        filtro.type) && (
+        <button onClick={handleRemoveFilter}>Remover Filtro</button>
+      )}
+
+      <div>
+        <p style={{ paddingLeft: "2%" }}>
+          Filtros Aplicados: {filtro.name && "name"} {filtro.gender && "gender"}{" "}
+          {filtro.species && "species"}
+          {filtro.status && "status"} {filtro.type && "type"}
+        </p>
+      </div>
+
       <Characters
         pageSelect={pageSelect}
         handleChangeNextList={handleChangeNextList}

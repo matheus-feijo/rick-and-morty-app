@@ -1,137 +1,90 @@
+import { Funnel } from "@phosphor-icons/react";
+import { Drawer, Form, Radio, Button, Input, Tooltip } from "antd";
 import { useState } from "react";
 import { IFilter } from "../../interfaces/IFilter";
 
 export function Filter({
   handleChangeFilter,
-  handleRemoveFilter,
-  filtro,
 }: {
   handleChangeFilter: (filtro: IFilter) => void;
-  handleRemoveFilter: () => void;
-  filtro: IFilter;
 }) {
-  const [nameFilter, setNameFilter] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
-  const [specieFilter, setSpecieFilter] = useState("");
-  const [typeFilter, setTypeFilter] = useState("");
-  const [genderFilter, setGenderFilter] = useState("");
+  const [open, setOpen] = useState(false);
+  const [formFiltro] = Form.useForm();
 
-  const handleChangeStatus = (e: any) => {
-    setStatusFilter(e.target.value);
+  const showDrawer = () => {
+    setOpen(true);
   };
 
-  const handleChangeGender = (e: any) => {
-    setGenderFilter(e.target.value);
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  const onFinish = (values: any) => {
+    console.log(values);
+    handleChangeFilter({
+      name: values.name || "",
+      status: values.status || "",
+      species: values.specie || "",
+      gender: values.gender || "",
+      type: values.type || "",
+    });
+
+    onClose();
+    formFiltro.resetFields();
   };
 
   return (
-    <div>
-      <div>FILTRO</div>
-      <div>
-        <p>Buscar pelo nome</p>
-        <input
-          value={nameFilter}
-          onChange={(e) => setNameFilter(e.target.value)}
-        />
-
-        <p>Buscar pelo Status</p>
-        <div onChange={(e) => console.log(e)}>
-          <input
-            type="radio"
-            value="alive"
-            name="status"
-            onChange={handleChangeStatus}
-          />{" "}
-          Alive
-          <input
-            type="radio"
-            value="dead"
-            name="status"
-            onChange={handleChangeStatus}
-          />{" "}
-          Dead
-          <input
-            type="radio"
-            value="unknown"
-            name="status"
-            onChange={handleChangeStatus}
-          />{" "}
-          Unknown
-        </div>
-        <p>Buscar pela Especie</p>
-        <input
-          value={specieFilter}
-          onChange={(e) => setSpecieFilter(e.target.value)}
-        />
-
-        <p>Buscar pelo tipo</p>
-        <input
-          value={typeFilter}
-          onChange={(e) => setTypeFilter(e.target.value)}
-        />
-
-        <p>Buscar pelo Genero</p>
-        <div>
-          <input
-            type="radio"
-            value="female"
-            name="gender"
-            onChange={handleChangeGender}
-          />{" "}
-          Female
-          <input
-            type="radio"
-            value="male"
-            name="gender"
-            onChange={handleChangeGender}
-          />{" "}
-          Male
-          <input
-            type="radio"
-            value="genderless"
-            name="gender"
-            onChange={handleChangeGender}
-          />{" "}
-          Genderless
-          <input
-            type="radio"
-            value="unknown"
-            name="gender"
-            onChange={handleChangeGender}
-          />{" "}
-          Unknown
-        </div>
-
+    <div style={{ padding: "50px 0px 20px 50px" }}>
+      <Tooltip title="Filter">
         <button
-          onClick={() =>
-            handleChangeFilter({
-              name: nameFilter,
-              status: statusFilter,
-              species: specieFilter,
-              gender: genderFilter,
-              type: typeFilter,
-            })
-          }
+          onClick={showDrawer}
+          style={{ cursor: "pointer", borderRadius: 8 }}
         >
-          Buscar
+          <Funnel size={32} />
         </button>
+      </Tooltip>
 
-        {(filtro.name ||
-          filtro.gender ||
-          filtro.species ||
-          filtro.status ||
-          filtro.type) && (
-          <button onClick={handleRemoveFilter}>Remover Filtro</button>
-        )}
+      <Form
+        id="form-filtro"
+        layout="vertical"
+        onFinish={onFinish}
+        form={formFiltro}
+      >
+        <Drawer title="Filtro" placement="right" onClose={onClose} open={open}>
+          <Form.Item label="Name" name="name">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Specie" name="specie">
+            <Input />
+          </Form.Item>
 
-        <div>
-          <p>
-            Filtros Aplicados: {filtro.name && "name"}{" "}
-            {filtro.gender && "gender"} {filtro.species && "species"}
-            {filtro.status && "status"} {filtro.type && "type"}
-          </p>
-        </div>
-      </div>
+          <Form.Item label="Type" name="type">
+            <Input />
+          </Form.Item>
+
+          <Form.Item label="Status" name="status">
+            <Radio.Group>
+              <Radio value={"alive"}>Alive</Radio>
+              <Radio value={"dead"}>Dead</Radio>
+              <Radio value={"unknown"}>Unknown</Radio>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item label="Gender" name="gender">
+            <Radio.Group>
+              <Radio value={"female"}>Female</Radio>
+              <Radio value={"male"}>Male</Radio>
+              <Radio value={"genderless"}>Genderless</Radio>
+              <Radio value={"unknown"}>Unknown</Radio>
+            </Radio.Group>
+          </Form.Item>
+
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button htmlType="submit" form="form-filtro" type="primary">
+              Aplicar filtro
+            </Button>
+          </div>
+        </Drawer>
+      </Form>
     </div>
   );
 }
