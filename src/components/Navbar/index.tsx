@@ -1,21 +1,27 @@
 import { useNavigate } from "react-router-dom";
+import { Layout, Menu } from "antd";
 
 export function Navbar() {
   const navigate = useNavigate();
 
   return (
-    <div
-      style={{
-        backgroundColor: "#FFFF",
-        width: "100%",
-        height: "5vh",
-        justifyContent: "space-around",
-        alignItems: "center",
-        display: "flex",
-      }}
-    >
-      <button onClick={() => navigate("/favorites")}>Favoritos</button>
-      <button onClick={() => navigate("/")}>Home</button>
-    </div>
+    <header style={{ position: "sticky", top: 0, zIndex: 1, width: "100%" }}>
+      <Menu
+        mode="horizontal"
+        defaultSelectedKeys={["2"]}
+        items={[
+          {
+            key: 0,
+            label: "Favorites",
+            onClick: () => navigate("/favorites"),
+          },
+          {
+            key: 1,
+            label: "Home",
+            onClick: () => navigate("/"),
+          },
+        ]}
+      />
+    </header>
   );
 }

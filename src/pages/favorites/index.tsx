@@ -12,6 +12,8 @@ import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAc
 import { ICharacter } from "../../interfaces/ICharacter";
 import { Navbar } from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import { Filter } from "../../components/Filter";
+import { IFilter } from "../../interfaces/IFilter";
 
 export function Favorites() {
   const favoriteCharacterList = useSelector(getAllFavoriteCharacters);
@@ -24,6 +26,8 @@ export function Favorites() {
   const handleRemoveCharacter = (character: ICharacter) => {
     appDispatch(removeFavoriteCharacter(character.id));
   };
+
+  const handleChangeFilterFavoriteList = (filtro: IFilter) => {};
 
   return (
     <div>
@@ -45,6 +49,14 @@ export function Favorites() {
           {" "}
           <ArrowLeft size={32} /> Voltar
         </button>
+      </div>
+
+      <div style={{ textAlign: "center", color: "#FFFF", fontSize: 28 }}>
+        <h1>Favoritos</h1>
+      </div>
+
+      <div>
+        <Filter handleChangeFilter={handleChangeFilterFavoriteList} />
       </div>
 
       <div

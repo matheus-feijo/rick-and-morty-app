@@ -82,13 +82,16 @@ export function Home() {
   };
 
   const handleRemoveFilter = () => {
-    setPageSelect("");
     setFiltro({
       name: "",
       status: "",
       gender: "",
       species: "",
       type: "",
+    });
+
+    api.get("/character").then((res) => {
+      appDispatch(addCharacters(res.data));
     });
   };
 
@@ -111,6 +114,17 @@ export function Home() {
       }}
     >
       <Navbar />
+
+      <div
+        style={{
+          textAlign: "center",
+          color: "#FFFF",
+          fontSize: 28,
+          paddingTop: 50,
+        }}
+      >
+        <h1>Personagens</h1>
+      </div>
 
       <Filter handleChangeFilter={handleChangeFilter} />
       {(filtro.name ||
