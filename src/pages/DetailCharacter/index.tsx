@@ -1,7 +1,7 @@
-import { ArrowLeft } from "@phosphor-icons/react";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { ButtonCSS } from "../../components/ButtonCSS";
 import { Navbar } from "../../components/Navbar";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { api } from "../../services/api";
@@ -24,22 +24,7 @@ export function DetailCharacter() {
     return (
       <div style={{ padding: "20px 0px 0px 20px" }}>
         <Navbar />
-        <button
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            padding: 5,
-            backgroundColor: "#ffff",
-            border: "none",
-            borderRadius: 8,
-            cursor: "pointer",
-          }}
-          onClick={() => history.go(-1)}
-        >
-          {" "}
-          <ArrowLeft size={32} /> Voltar
-        </button>
+        <ButtonCSS onClick={() => history.go(-1)}> Voltar</ButtonCSS>
       </div>
     );
   }
@@ -48,23 +33,7 @@ export function DetailCharacter() {
     <div>
       <Navbar />
       <div style={{ padding: "20px 0px 0px 20px" }}>
-        {" "}
-        <button
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            padding: 5,
-            backgroundColor: "#ffff",
-            border: "none",
-            borderRadius: 8,
-            cursor: "pointer",
-          }}
-          onClick={() => history.go(-1)}
-        >
-          {" "}
-          <ArrowLeft size={32} /> Voltar
-        </button>
+        <ButtonCSS onClick={() => history.go(-1)}>Voltar</ButtonCSS>
       </div>
 
       <div style={{ textAlign: "center" }}>

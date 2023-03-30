@@ -10,6 +10,7 @@ import { ICharacter } from "../../interfaces/ICharacter";
 import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAction";
 import { Navbar } from "../../components/Navbar";
 import logo from "../../assets/rick-and-morty.png";
+import { ButtonCSS } from "../../components/ButtonCSS";
 
 export function Home() {
   const [pageSelect, setPageSelect] = useState("");
@@ -126,7 +127,7 @@ export function Home() {
         filtro.species ||
         filtro.status ||
         filtro.type) && (
-        <button onClick={handleRemoveFilter}>Remover Filtro</button>
+        <ButtonCSS onClick={handleRemoveFilter}>Remover Filtro</ButtonCSS>
       )}
 
       <div>

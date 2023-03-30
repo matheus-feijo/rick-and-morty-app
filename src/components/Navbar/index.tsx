@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Layout, Menu } from "antd";
+import { Menu } from "antd";
 
 export function Navbar() {
   const navigate = useNavigate();
@@ -8,17 +8,17 @@ export function Navbar() {
     <header style={{ position: "sticky", top: 0, zIndex: 1, width: "100%" }}>
       <Menu
         mode="horizontal"
-        defaultSelectedKeys={["2"]}
+        defaultSelectedKeys={["0"]}
         items={[
           {
             key: 0,
-            label: "Favorites",
-            onClick: () => navigate("/favorites"),
+            label: "Home",
+            onClick: () => navigate("/"),
           },
           {
             key: 1,
-            label: "Home",
-            onClick: () => navigate("/"),
+            label: "Favoritos",
+            onClick: () => navigate("/favorites"),
           },
         ]}
       />

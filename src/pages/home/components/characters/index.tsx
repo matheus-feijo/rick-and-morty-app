@@ -2,19 +2,16 @@ import { useQuery } from "react-query";
 import { ICharacter } from "../../../../interfaces/ICharacter";
 import { IDadosCharacters } from "../../../../interfaces/IDadosCharacters";
 import { api } from "../../../../services/api";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCharacters } from "../../../../store/reducers/characterSlice";
 import { characterAction } from "../../../../store/actions/characterAction";
 import { getFavoriteCharactersId } from "../../../../store/reducers/favoriteCharacterSlice";
-import {
-  ButtonPagination,
-  CardCharacter,
-  ContainerCards,
-  ImageCharacter,
-} from "./styled";
 import { Heart } from "@phosphor-icons/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ButtonCSS } from "../../../../components/ButtonCSS";
+import { CardCharacter } from "../../../../components/CardCSS";
+import { ContainerCards, ImageCharacter } from "./styled";
 
 interface ICharacterAPI {
   info: IDadosCharacters;
@@ -100,12 +97,8 @@ export function Characters({
                     <b>{character.name}</b>
                   </h4>
 
-                  <button
-                    style={{
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
+                  <ButtonCSS
+                    typeCSS="FAVORITE"
                     onClick={() => {
                       if (idsFavoriteCharacter.includes(character.id)) {
                         handleFavoriteCharacter(character, "DESFAVORITAR");
@@ -123,7 +116,7 @@ export function Characters({
                           : "regular"
                       }
                     />
-                  </button>
+                  </ButtonCSS>
                 </div>
               </CardCharacter>
             </ContainerCards>
@@ -139,7 +132,7 @@ export function Characters({
           padding: "50px 25px 25px",
         }}
       >
-        <ButtonPagination
+        <ButtonCSS
           onClick={(e) => {
             e.preventDefault();
             handleChangePrevList();
@@ -147,8 +140,9 @@ export function Characters({
           disabled={!characterList.items.info?.prev}
         >
           Previous
-        </ButtonPagination>
-        <ButtonPagination
+        </ButtonCSS>
+        <ButtonCSS
+          typeCSS="PRIMARY"
           onClick={(e) => {
             e.preventDefault();
             handleChangeNextList();
@@ -156,7 +150,7 @@ export function Characters({
           disabled={!characterList.items.info?.next}
         >
           Next
-        </ButtonPagination>
+        </ButtonCSS>
       </div>
     </>
   );

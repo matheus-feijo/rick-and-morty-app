@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  CardCharacter,
   ContainerCards,
+  ImageCharacter,
 } from "../home/components/characters/styled";
 import {
   getAllFavoriteCharacters,
@@ -12,9 +12,9 @@ import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAc
 import { ICharacter } from "../../interfaces/ICharacter";
 import { Navbar } from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
-import { Filter } from "../../components/Filter";
-import { IFilter } from "../../interfaces/IFilter";
 import { TitlePage } from "../home/styled";
+import { ButtonCSS } from "../../components/ButtonCSS";
+import { CardCharacter } from "../../components/CardCSS";
 
 export function Favorites() {
   const favoriteCharacterList = useSelector(getAllFavoriteCharacters);
@@ -28,18 +28,12 @@ export function Favorites() {
     appDispatch(removeFavoriteCharacter(character.id));
   };
 
-  const handleChangeFilterFavoriteList = (filtro: IFilter) => {};
-
   return (
     <div>
       <Navbar />
 
       <div style={{ textAlign: "center", paddingTop: 50 }}>
         <TitlePage>Favoritos</TitlePage>
-      </div>
-
-      <div>
-        <Filter handleChangeFilter={handleChangeFilterFavoriteList} />
       </div>
 
       <div
@@ -49,18 +43,17 @@ export function Favorites() {
           flexWrap: "wrap",
           justifyContent: "center",
           marginTop: 50,
+          padding: 20,
         }}
       >
         {favoriteCharacterList.map((character) => {
           return (
             <ContainerCards key={character.id}>
               <CardCharacter>
-                <img
+                <ImageCharacter
                   src={character.image}
                   alt={character.name}
-                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    // console.log(character);
                     navigate(`/character/${character.id}`);
                   }}
                 />
@@ -76,12 +69,8 @@ export function Favorites() {
                     <b>{character.name}</b>
                   </h4>
 
-                  <button
-                    style={{
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
+                  <ButtonCSS
+                    typeCSS="FAVORITE"
                     onClick={() => handleRemoveCharacter(character)}
                   >
                     <Heart
@@ -93,7 +82,7 @@ export function Favorites() {
                           : "regular"
                       }
                     />
-                  </button>
+                  </ButtonCSS>
                 </div>
               </CardCharacter>
             </ContainerCards>
