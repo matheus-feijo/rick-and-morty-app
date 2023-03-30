@@ -2,9 +2,8 @@ import { ReactNode } from "react";
 import styled, { css } from "styled-components";
 
 interface IButtonProps {
-  typeCSS?: "PRIMARY" | "SECUNDARY" | "DANGER" | "FAVORITE";
-  heigth?: string;
-  width?: string;
+  typeCSS?: "PRIMARY" | "ICON" | "DANGER" | "FAVORITE";
+  submit?: boolean;
   children: ReactNode;
 }
 
@@ -29,6 +28,13 @@ export const ButtonCSS = styled.button<IButtonProps>`
   }
 
   ${(props) =>
+    props.submit &&
+    css`
+      background-color: #1c5e7f;
+      color: #fff;
+    `}
+
+  ${(props) =>
     props.typeCSS === "PRIMARY" &&
     css`
       background-color: #89d99d;
@@ -45,8 +51,9 @@ export const ButtonCSS = styled.button<IButtonProps>`
     `}
 
   ${(props) =>
-    props.heigth &&
+    props.typeCSS === "ICON" &&
     css`
-      height: props.heigth;
+      height: auto;
+      width: auto;
     `}
 `;

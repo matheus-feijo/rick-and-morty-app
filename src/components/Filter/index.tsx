@@ -1,7 +1,8 @@
 import { Funnel } from "@phosphor-icons/react";
-import { Drawer, Form, Radio, Button, Input, Tooltip } from "antd";
+import { Drawer, Form, Radio, Input, Tooltip } from "antd";
 import { useState } from "react";
 import { IFilter } from "../../interfaces/IFilter";
+import { ButtonCSS } from "../ButtonCSS";
 
 export function Filter({
   handleChangeFilter,
@@ -36,13 +37,9 @@ export function Filter({
   return (
     <div style={{ padding: "50px 0px 20px 50px" }}>
       <Tooltip title="Filtro">
-        <Button
-          id="filtro"
-          onClick={showDrawer}
-          style={{ cursor: "pointer", borderRadius: 8, height: 42 }}
-        >
+        <ButtonCSS typeCSS="ICON" id="filtro" onClick={showDrawer}>
           <Funnel size={32} />
-        </Button>
+        </ButtonCSS>
       </Tooltip>
 
       <Form
@@ -80,9 +77,9 @@ export function Filter({
           </Form.Item>
 
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button htmlType="submit" form="form-filtro" type="primary">
+            <ButtonCSS type="submit" form="form-filtro" submit>
               Aplicar filtro
-            </Button>
+            </ButtonCSS>
           </div>
         </Drawer>
       </Form>

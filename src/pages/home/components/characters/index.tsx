@@ -35,7 +35,7 @@ export function Characters({
   const navigate = useNavigate();
   const { addCharacters } = characterAction;
 
-  const { status, data, refetch } = useQuery<ICharacterAPI, unknown>({
+  const { status, refetch } = useQuery<ICharacterAPI, unknown>({
     queryFn: () => api.get(`/character/${pageSelect}`).then((res) => res.data),
     queryKey: "personagens",
     onSuccess: (data) => {
