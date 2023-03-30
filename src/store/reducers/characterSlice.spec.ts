@@ -1,5 +1,6 @@
 import characterReducer from "./characterSlice";
 import { characterAction } from "../actions/characterAction";
+import { describe, it, expect } from "vitest";
 
 describe("Testando reducer de listagem de personagens", () => {
   const state = {
@@ -40,7 +41,7 @@ describe("Testando reducer de listagem de personagens", () => {
   it("adicionar personagens", () => {
     const initialValue = { items: { info: null, results: [] } };
     const action = characterAction.addCharacters(state);
-    const expectedState = { state };
+    const expectedState = { items: state };
 
     expect(characterReducer(initialValue, action)).toEqual(expectedState);
   });

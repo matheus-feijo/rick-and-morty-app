@@ -37,6 +37,7 @@ export function Filter({
     <div style={{ padding: "50px 0px 20px 50px" }}>
       <Tooltip title="Filtro">
         <Button
+          id="filtro"
           onClick={showDrawer}
           style={{ cursor: "pointer", borderRadius: 8, height: 42 }}
         >
