@@ -8,7 +8,6 @@ export function Navbar() {
     <header style={{ position: "sticky", top: 0, zIndex: 1, width: "100%" }}>
       <Menu
         mode="horizontal"
-        defaultSelectedKeys={["0"]}
         items={[
           {
             key: 0,
