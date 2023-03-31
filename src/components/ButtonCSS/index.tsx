@@ -1,10 +1,8 @@
-import { ReactNode } from "react";
 import styled, { css } from "styled-components";
 
 interface IButtonProps {
-  typeCSS?: "PRIMARY" | "ICON" | "DANGER" | "FAVORITE";
+  typeCSS?: "PRIMARY" | "ICON" | "FAVORITE";
   submit?: boolean;
-  children: ReactNode;
 }
 
 export const ButtonCSS = styled.button<IButtonProps>`

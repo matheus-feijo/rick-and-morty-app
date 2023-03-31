@@ -10,7 +10,7 @@ import { getFavoriteCharactersId } from "../../../../store/reducers/favoriteChar
 import { Heart } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 import { ButtonCSS } from "../../../../components/ButtonCSS";
-import { CardCharacter } from "../../../../components/CardCSS";
+import { CardCSS } from "../../../../components/CardCSS";
 import { ImageCharacter } from "../../../../components/ImageCharacter";
 import { ContainerCards } from "../../../../components/ContainerCards";
 
@@ -78,7 +78,7 @@ export function Characters({
         {characterList.items.results.map((character) => {
           return (
             <ContainerCards key={character.id}>
-              <CardCharacter>
+              <CardCSS>
                 <ImageCharacter
                   src={character.image}
                   alt={character.name}
@@ -119,7 +119,7 @@ export function Characters({
                     />
                   </ButtonCSS>
                 </div>
-              </CardCharacter>
+              </CardCSS>
             </ContainerCards>
           );
         })}

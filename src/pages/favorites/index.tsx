@@ -10,7 +10,7 @@ import { Navbar } from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { TitlePage } from "./styled";
 import { ButtonCSS } from "../../components/ButtonCSS";
-import { CardCharacter } from "../../components/CardCSS";
+import { CardCSS } from "../../components/CardCSS";
 import { ImageCharacter } from "../../components/ImageCharacter";
 import { ContainerCards } from "../../components/ContainerCards";
 
@@ -45,7 +45,7 @@ export function Favorites() {
         {favoriteCharacterList.map((character) => {
           return (
             <ContainerCards key={character.id}>
-              <CardCharacter>
+              <CardCSS>
                 <ImageCharacter
                   src={character.image}
                   alt={character.name}
@@ -80,7 +80,7 @@ export function Favorites() {
                     />
                   </ButtonCSS>
                 </div>
-              </CardCharacter>
+              </CardCSS>
             </ContainerCards>
           );
         })}

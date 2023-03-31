@@ -4,7 +4,7 @@ interface ICardCharacterProps {
   favorite?: boolean;
 }
 
-export const CardCharacter = styled.div<ICardCharacterProps>`
+export const CardCSS = styled.div<ICardCharacterProps>`
   background-color: #ffff;
   text-align: center;
   padding: 10px;
