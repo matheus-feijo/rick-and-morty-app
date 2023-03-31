@@ -1,6 +1,6 @@
 import { Characters } from "./components/characters";
 import { Filter } from "../../components/Filter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IFilter } from "../../interfaces/IFilter";
 import { useDispatch, useSelector } from "react-redux";
 import { getCharacters } from "../../store/reducers/characterSlice";
@@ -11,8 +11,11 @@ import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAc
 import logo from "../../assets/rick-and-morty.png";
 import { ButtonCSS } from "../../components/ButtonCSS";
 import { ImgTitle } from "./styled";
+import { useLocation } from "react-router-dom";
 
 export function Home() {
+  const location = useLocation();
+
   const [pageSelect, setPageSelect] = useState("");
   const [filtro, setFiltro] = useState<IFilter>({
     name: "",
@@ -107,6 +110,12 @@ export function Home() {
       appDispatch(removeFavoriteCharacter(character.id));
     }
   };
+
+  useEffect(() => {
+    if (location.state) {
+      setPageSelect(location.state.pageSelect);
+    }
+  }, []);
 
   return (
     <div

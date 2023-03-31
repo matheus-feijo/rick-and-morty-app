@@ -83,7 +83,12 @@ export function Characters({
                     src={character.image}
                     alt={character.name}
                     onClick={() => {
-                      navigate(`/character/${character.id}`);
+                      navigate(`/character/${character.id}`, {
+                        state: {
+                          pageSelect,
+                          urlBack: window.location.pathname.toString(),
+                        },
+                      });
                     }}
                   />
                   <div

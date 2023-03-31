@@ -50,7 +50,9 @@ export function Favorites() {
                   src={character.image}
                   alt={character.name}
                   onClick={() => {
-                    navigate(`/character/${character.id}`);
+                    navigate(`/character/${character.id}`, {
+                      state: { urlBack: window.location.pathname.toString() },
+                    });
                   }}
                 />
                 <div
