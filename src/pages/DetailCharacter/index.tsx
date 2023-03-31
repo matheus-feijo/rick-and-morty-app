@@ -5,21 +5,16 @@ import { ButtonCSS } from "../../components/ButtonCSS";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { api } from "../../services/api";
 import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";
-import { useEffect } from "react";
 
 export function DetailCharacter() {
   const { id } = useParams();
   const idsFavoriteCharacterList = useSelector(getFavoriteCharactersId);
 
-  const { data, status, refetch } = useQuery<ICharacter, unknown>({
+  const { data, status } = useQuery<ICharacter, unknown>({
     initialData: undefined,
     queryKey: "single-character",
     queryFn: () => api.get(`/character/${id}`).then((res) => res.data),
   });
-
-  useEffect(() => {
-    refetch();
-  }, []);
 
   if (status === "loading" || status === "idle") {
     return (
