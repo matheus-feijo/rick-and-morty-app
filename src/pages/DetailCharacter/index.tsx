@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ButtonCSS } from "../../components/ButtonCSS";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { api } from "../../services/api";
@@ -9,8 +9,6 @@ import { ImgDetailCharacter, TextDetailCharacter } from "./styled";
 
 export function DetailCharacter() {
   const { id } = useParams();
-  const location = useLocation();
-  const navigate = useNavigate();
 
   const idsFavoriteCharacterList = useSelector(getFavoriteCharactersId);
 
@@ -38,15 +36,7 @@ export function DetailCharacter() {
     return (
       <div>
         <div style={{ padding: 20 }}>
-          <ButtonCSS
-            onClick={() =>
-              navigate(location.state.urlBack, {
-                state: { pageSelect: location.state.pageSelect },
-              })
-            }
-          >
-            Voltar
-          </ButtonCSS>
+          <ButtonCSS onClick={() => history.go(-1)}>Voltar</ButtonCSS>
         </div>
 
         <div style={{ textAlign: "center" }}>
