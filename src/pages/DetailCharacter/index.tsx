@@ -5,6 +5,7 @@ import { ButtonCSS } from "../../components/ButtonCSS";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { api } from "../../services/api";
 import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";
+import { ImgDetailCharacter, TextDetailCharacter } from "./styled";
 
 export function DetailCharacter() {
   const { id } = useParams();
@@ -33,30 +34,26 @@ export function DetailCharacter() {
   } else if (status === "success") {
     return (
       <div>
-        <div style={{ padding: "20px 0px 0px 20px" }}>
+        <div style={{ padding: 20 }}>
           <ButtonCSS onClick={() => history.go(-1)}>Voltar</ButtonCSS>
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <img
-            src={data?.image}
-            alt={data?.name}
-            style={{ border: "10px solid #FFFF", borderRadius: 8 }}
-          />
+          <ImgDetailCharacter src={data?.image} alt={data?.name} />
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <div style={{ fontSize: 28, color: "#FFFF" }}>
-            <p>Nome: {data?.name}</p>
-            <p>Genero: {data?.gender}</p>
-            <p>Especie: {data?.species}</p>
-            <p>Status: {data?.status}</p>
-            <p>Tipo: {data?.type}</p>
-            <p>
+          <div>
+            <TextDetailCharacter>Nome: {data?.name}</TextDetailCharacter>
+            <TextDetailCharacter>Genero: {data?.gender}</TextDetailCharacter>
+            <TextDetailCharacter>Especie: {data?.species}</TextDetailCharacter>
+            <TextDetailCharacter>Status: {data?.status}</TextDetailCharacter>
+            <TextDetailCharacter>Tipo: {data?.type}</TextDetailCharacter>
+            <TextDetailCharacter>
               Favorito:{" "}
               {idsFavoriteCharacterList.includes(data?.id || -1)
                 ? "True"
                 : "False"}
-            </p>
+            </TextDetailCharacter>
           </div>
         </div>
       </div>

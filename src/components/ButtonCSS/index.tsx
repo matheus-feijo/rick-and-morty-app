@@ -46,6 +46,7 @@ export const ButtonCSS = styled.button<IButtonProps>`
       height: auto;
       padding: 0;
       border-radius: 0px;
+      background-color: transparent;
     `}
 
   ${(props) =>

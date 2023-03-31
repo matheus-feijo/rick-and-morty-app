@@ -12,6 +12,7 @@ import { ButtonCSS } from "../../components/ButtonCSS";
 import { CardCSS } from "../../components/CardCSS";
 import { ImageCharacter } from "../../components/ImageCharacter";
 import { ContainerCards } from "../../components/ContainerCards";
+import { TextCard } from "../../components/TextCard";
 
 export function Favorites() {
   const favoriteCharacterList = useSelector(getAllFavoriteCharacters);
@@ -60,9 +61,9 @@ export function Favorites() {
                     gap: 5,
                   }}
                 >
-                  <h4>
+                  <TextCard>
                     <b>{character.name}</b>
-                  </h4>
+                  </TextCard>
 
                   <ButtonCSS
                     typeCSS="FAVORITE"

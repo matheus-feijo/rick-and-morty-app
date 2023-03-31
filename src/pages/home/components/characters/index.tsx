@@ -13,7 +13,7 @@ import { ButtonCSS } from "../../../../components/ButtonCSS";
 import { CardCSS } from "../../../../components/CardCSS";
 import { ImageCharacter } from "../../../../components/ImageCharacter";
 import { ContainerCards } from "../../../../components/ContainerCards";
-
+import { TextCard } from "../../../../components/TextCard";
 interface ICharacterAPI {
   info: IDadosCharacters;
   results: ICharacter[];
@@ -72,6 +72,7 @@ export function Characters({
             flexWrap: "wrap",
             justifyContent: "center",
             marginTop: 50,
+            padding: 20,
           }}
         >
           {characterList.items.results.map((character) => {
@@ -93,9 +94,9 @@ export function Characters({
                       gap: 5,
                     }}
                   >
-                    <h4>
+                    <TextCard>
                       <b>{character.name}</b>
-                    </h4>
+                    </TextCard>
 
                     <ButtonCSS
                       typeCSS="FAVORITE"
