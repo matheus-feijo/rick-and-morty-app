@@ -10,6 +10,7 @@ import { ICharacter } from "../../interfaces/ICharacter";
 import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAction";
 import logo from "../../assets/rick-and-morty.png";
 import { ButtonCSS } from "../../components/ButtonCSS";
+import { ImgTitle } from "./styled";
 
 export function Home() {
   const [pageSelect, setPageSelect] = useState("");
@@ -115,7 +116,7 @@ export function Home() {
       }}
     >
       <div style={{ textAlign: "center", paddingTop: 50 }}>
-        <img src={logo} style={{ width: "35vh" }} alt="logo" />
+        <ImgTitle src={logo} alt="logo" />
       </div>
 
       <Filter handleChangeFilter={handleChangeFilter} />
