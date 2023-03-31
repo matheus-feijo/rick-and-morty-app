@@ -1,9 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  ContainerCards,
-  ImageCharacter,
-} from "../home/components/characters/styled";
-import {
   getAllFavoriteCharacters,
   getFavoriteCharactersId,
 } from "../../store/reducers/favoriteCharacterSlice";
@@ -12,9 +8,11 @@ import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAc
 import { ICharacter } from "../../interfaces/ICharacter";
 import { Navbar } from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
-import { TitlePage } from "../home/styled";
+import { TitlePage } from "./styled";
 import { ButtonCSS } from "../../components/ButtonCSS";
 import { CardCharacter } from "../../components/CardCSS";
+import { ImageCharacter } from "../../components/ImageCharacter";
+import { ContainerCards } from "../../components/ContainerCards";
 
 export function Favorites() {
   const favoriteCharacterList = useSelector(getAllFavoriteCharacters);

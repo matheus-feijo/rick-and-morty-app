@@ -11,7 +11,8 @@ import { Heart } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 import { ButtonCSS } from "../../../../components/ButtonCSS";
 import { CardCharacter } from "../../../../components/CardCSS";
-import { ContainerCards, ImageCharacter } from "./styled";
+import { ImageCharacter } from "../../../../components/ImageCharacter";
+import { ContainerCards } from "../../../../components/ContainerCards";
 
 interface ICharacterAPI {
   info: IDadosCharacters;
