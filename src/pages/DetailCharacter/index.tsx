@@ -6,6 +6,7 @@ import { ICharacter } from "../../interfaces/ICharacter";
 import { api } from "../../services/api";
 import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";
 import { ImgDetailCharacter, TextDetailCharacter } from "./styled";
+import moment from "moment";
 
 export function DetailCharacter() {
   const { id } = useParams();
@@ -49,6 +50,13 @@ export function DetailCharacter() {
             <TextDetailCharacter>Especie: {data?.species}</TextDetailCharacter>
             <TextDetailCharacter>Status: {data?.status}</TextDetailCharacter>
             <TextDetailCharacter>Tipo: {data?.type}</TextDetailCharacter>
+            <TextDetailCharacter>
+              Origem: {data?.origin.name}
+            </TextDetailCharacter>
+            <TextDetailCharacter>
+              Criado em: {moment(data.created).locale("pt-br").format("L")}
+            </TextDetailCharacter>
+
             <TextDetailCharacter>
               Favorito:{" "}
               {idsFavoriteCharacterList.includes(data?.id || -1)
