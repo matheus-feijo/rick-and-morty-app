@@ -6,7 +6,6 @@ import {
 import { Heart } from "@phosphor-icons/react";
 import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAction";
 import { ICharacter } from "../../interfaces/ICharacter";
-import { Navbar } from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { TitlePage } from "./styled";
 import { ButtonCSS } from "../../components/ButtonCSS";

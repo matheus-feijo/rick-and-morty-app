@@ -8,7 +8,6 @@ import { api } from "../../services/api";
 import { characterAction } from "../../store/actions/characterAction";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAction";
-import { Navbar } from "../../components/Navbar";
 import logo from "../../assets/rick-and-morty.png";
 import { ButtonCSS } from "../../components/ButtonCSS";
 
