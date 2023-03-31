@@ -75,7 +75,7 @@ export function Home() {
 
     try {
       await api.get(`/character/?${params.toString()}`).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         appDispatch(addCharacters(res.data));
       });
     } catch (error) {
@@ -120,13 +120,6 @@ export function Home() {
       </div>
 
       <Filter handleChangeFilter={handleChangeFilter} />
-      {(filtro.name ||
-        filtro.gender ||
-        filtro.species ||
-        filtro.status ||
-        filtro.type) && (
-        <ButtonCSS onClick={handleRemoveFilter}>Remover Filtro</ButtonCSS>
-      )}
 
       <div>
         <p style={{ paddingLeft: "2%", color: "#FFFF" }}>
@@ -135,7 +128,17 @@ export function Home() {
           {filtro.status && "status"} {filtro.type && "type"}
         </p>
       </div>
-
+      {(filtro.name ||
+        filtro.gender ||
+        filtro.species ||
+        filtro.status ||
+        filtro.type) && (
+        <div style={{ paddingLeft: "2%", paddingTop: 25 }}>
+          <ButtonCSS onClick={handleRemoveFilter} typeCSS="DANGER">
+            Remover Filtro
+          </ButtonCSS>
+        </div>
+      )}
       <Characters
         pageSelect={pageSelect}
         handleChangeNextList={handleChangeNextList}

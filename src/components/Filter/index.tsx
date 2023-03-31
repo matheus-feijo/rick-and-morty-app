@@ -21,7 +21,11 @@ export function Filter({
   };
 
   const onFinish = (values: any) => {
-    // console.log(values);
+    if (Object.values(values).filter((value) => !value).length === 5) {
+      alert("Preencha ao menos algum campo para aplicar filtro");
+      return;
+    }
+
     handleChangeFilter({
       name: values.name || "",
       status: values.status || "",
@@ -49,14 +53,14 @@ export function Filter({
         form={formFiltro}
       >
         <Drawer title="Filtro" placement="right" onClose={onClose} open={open}>
-          <Form.Item label="Name" name="name">
+          <Form.Item label="Nome" name="name">
             <Input data-testid="name-test" />
           </Form.Item>
-          <Form.Item label="Specie" name="specie">
+          <Form.Item label="Especie" name="specie">
             <Input />
           </Form.Item>
 
-          <Form.Item label="Type" name="type">
+          <Form.Item label="Tipo" name="type">
             <Input />
           </Form.Item>
 
@@ -67,7 +71,7 @@ export function Filter({
               <Radio value={"unknown"}>Unknown</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item label="Gender" name="gender">
+          <Form.Item label="Genero" name="gender">
             <Radio.Group>
               <Radio value={"female"}>Female</Radio>
               <Radio value={"male"}>Male</Radio>

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 interface IButtonProps {
-  typeCSS?: "PRIMARY" | "ICON" | "FAVORITE";
+  typeCSS?: "PRIMARY" | "ICON" | "FAVORITE" | "DANGER";
   submit?: boolean;
 }
 
@@ -53,5 +53,12 @@ export const ButtonCSS = styled.button<IButtonProps>`
     css`
       height: auto;
       width: auto;
+    `}
+    
+    ${(props) =>
+    props.typeCSS === "DANGER" &&
+    css`
+      background-color: #bf0426;
+      color: #ffff;
     `}
 `;
