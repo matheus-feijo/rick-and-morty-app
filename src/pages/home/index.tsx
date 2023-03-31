@@ -115,8 +115,6 @@ export function Home() {
         width: "100%",
       }}
     >
-      <Navbar />
-
       <div style={{ textAlign: "center", paddingTop: 50 }}>
         <img src={logo} style={{ width: "35vh" }} alt="logo" />
       </div>

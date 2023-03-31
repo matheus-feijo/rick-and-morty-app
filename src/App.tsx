@@ -1,4 +1,3 @@
-import { Home } from "./pages/home";
 import { Routers } from "./routes";
 
 function App() {

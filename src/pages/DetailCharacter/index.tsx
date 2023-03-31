@@ -17,13 +17,16 @@ export function DetailCharacter() {
   });
 
   if (status === "loading") {
-    return <p>Carregando...</p>;
+    return (
+      <div style={{ padding: "20px 0px 0px 20px" }}>
+        <p>Carregando...</p>
+      </div>
+    );
   }
 
   if (status === "error") {
     return (
       <div style={{ padding: "20px 0px 0px 20px" }}>
-        <Navbar />
         <ButtonCSS onClick={() => history.go(-1)}> Voltar</ButtonCSS>
       </div>
     );
@@ -31,7 +34,6 @@ export function DetailCharacter() {
 
   return (
     <div>
-      <Navbar />
       <div style={{ padding: "20px 0px 0px 20px" }}>
         <ButtonCSS onClick={() => history.go(-1)}>Voltar</ButtonCSS>
       </div>

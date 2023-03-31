@@ -28,8 +28,6 @@ export function Favorites() {
 
   return (
     <div>
-      <Navbar />
-
       <div style={{ textAlign: "center", paddingTop: 50 }}>
         <TitlePage>Favoritos</TitlePage>
       </div>
