@@ -21,7 +21,7 @@ export function Filter({
   };
 
   const onFinish = (values: any) => {
-    console.log(values);
+    // console.log(values);
     handleChangeFilter({
       name: values.name || "",
       status: values.status || "",
@@ -50,7 +50,7 @@ export function Filter({
       >
         <Drawer title="Filtro" placement="right" onClose={onClose} open={open}>
           <Form.Item label="Name" name="name">
-            <Input />
+            <Input data-testid="name-test" />
           </Form.Item>
           <Form.Item label="Specie" name="specie">
             <Input />
