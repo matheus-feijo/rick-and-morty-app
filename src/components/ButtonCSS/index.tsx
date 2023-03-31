@@ -38,7 +38,7 @@ export const ButtonCSS = styled.button<IButtonProps>`
     props.typeCSS === "PRIMARY" &&
     css`
       background-color: #89d99d;
-      color: #fff;
+      color: black;
     `}
 
   ${(props) =>

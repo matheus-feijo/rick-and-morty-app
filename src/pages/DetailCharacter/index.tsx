@@ -12,6 +12,7 @@ export function DetailCharacter() {
   const idsFavoriteCharacterList = useSelector(getFavoriteCharactersId);
 
   const { data, status } = useQuery<ICharacter, unknown>({
+    initialData: undefined,
     queryKey: "single-character",
     queryFn: () => api.get(`/character/${id}`).then((res) => res.data),
   });
@@ -47,13 +48,13 @@ export function DetailCharacter() {
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div style={{ fontSize: 28, color: "#FFFF" }}>
-          <p>Name: {data?.name}</p>
-          <p>Gender: {data?.gender}</p>
-          <p>Species: {data?.species}</p>
+          <p>Nome: {data?.name}</p>
+          <p>Genero: {data?.gender}</p>
+          <p>Especie: {data?.species}</p>
           <p>Status: {data?.status}</p>
-          <p>Type: {data?.type}</p>
+          <p>Tipo: {data?.type}</p>
           <p>
-            Favorited:{" "}
+            Favorito:{" "}
             {idsFavoriteCharacterList.includes(data?.id || -1)
               ? "True"
               : "False"}
