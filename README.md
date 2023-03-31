@@ -2,9 +2,29 @@
 
 ![](./src/assets/rick-and-morty.png)
 
+# Iniciar projeto
+* Instalar dependencias do projeto
+```
+npm i
+```
+
+* Iniciar aplicação no ambiente de desenvolvimento
+```
+npm run dev
+```
+
+* Iniciar testes 
+```
+npm run test
+```
+
+
+
+
 ### Funcionalidades
 
-* Listagem de todos os personagens da obra (limite:20/pagina);
+* Listagem de todos os personagens da obra (limite:20/pagina)
+* Listagem de personagens favoritos
 * Opção de favoritar personagens
 * Visualizar detalhes do personagem
 * Filtrar lista de personagens a partir dos seguintes parametros:

@@ -2,7 +2,6 @@ import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { ButtonCSS } from "../../components/ButtonCSS";
-import { Navbar } from "../../components/Navbar";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { api } from "../../services/api";
 import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";

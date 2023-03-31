@@ -1,7 +1,7 @@
 import { Home } from "../pages/home";
 import { Favorites } from "../pages/favorites";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { DetailCharacter } from "../pages/DetailCharacter";
+import { DetailCharacter } from "../pages/detailCharacter";
 import { Navbar } from "../components/Navbar";
 
 export function Routers() {
