@@ -1,8 +1,8 @@
 import { Home } from "../pages/home";
 import { Favorites } from "../pages/favorites";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { DetailCharacter } from "../pages/DetailCharacter";
 import { Navbar } from "../components/Navbar";
+import { DetailCharacter } from "../pages/DetailCharacter";
 
 export function Routers() {
   return (
