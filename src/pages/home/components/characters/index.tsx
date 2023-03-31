@@ -48,111 +48,125 @@ export function Characters({
     refetch();
   }, [pageSelect]);
 
-  if (status === "error") {
-    return <p>Error</p>;
-  }
-
-  if (status === "loading") {
+  if (status === "loading" || status === "idle") {
     return (
       <div
         style={{
-          marginTop: 50,
+          height: "90vh",
+          placeItems: "center",
+          display: "grid",
+          color: "#ffff",
+          fontSize: 60,
         }}
       >
-        Carregando...
+        <p>Carregando...</p>
+      </div>
+    );
+  } else if (status === "success") {
+    return (
+      <>
+        <div
+          style={{
+            display: "flex",
+            gap: 20,
+            flexWrap: "wrap",
+            justifyContent: "center",
+            marginTop: 50,
+          }}
+        >
+          {characterList.items.results.map((character) => {
+            return (
+              <ContainerCards key={character.id}>
+                <CardCSS>
+                  <ImageCharacter
+                    src={character.image}
+                    alt={character.name}
+                    onClick={() => {
+                      navigate(`/character/${character.id}`);
+                    }}
+                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: 5,
+                    }}
+                  >
+                    <h4>
+                      <b>{character.name}</b>
+                    </h4>
+
+                    <ButtonCSS
+                      typeCSS="FAVORITE"
+                      onClick={() => {
+                        if (idsFavoriteCharacter.includes(character.id)) {
+                          handleFavoriteCharacter(character, "DESFAVORITAR");
+                        } else {
+                          handleFavoriteCharacter(character, "FAVORITAR");
+                        }
+                      }}
+                    >
+                      <Heart
+                        size={32}
+                        color="#b4211f"
+                        weight={
+                          idsFavoriteCharacter.includes(character.id)
+                            ? "fill"
+                            : "regular"
+                        }
+                      />
+                    </ButtonCSS>
+                  </div>
+                </CardCSS>
+              </ContainerCards>
+            );
+          })}
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            gap: 10,
+            justifyContent: "end",
+            padding: "50px 25px 25px",
+          }}
+        >
+          <ButtonCSS
+            onClick={(e) => {
+              e.preventDefault();
+              handleChangePrevList();
+            }}
+            disabled={!characterList.items.info?.prev}
+          >
+            Previous
+          </ButtonCSS>
+          <ButtonCSS
+            typeCSS="PRIMARY"
+            onClick={(e) => {
+              e.preventDefault();
+              handleChangeNextList();
+            }}
+            disabled={!characterList.items.info?.next}
+          >
+            Next
+          </ButtonCSS>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <div
+        style={{
+          height: "90vh",
+          placeItems: "center",
+          display: "grid",
+          color: "#ffff",
+          fontSize: 50,
+        }}
+      >
+        <p>Erro ao carregar Lista de Personagens</p>
       </div>
     );
   }
-
-  return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          gap: 20,
-          flexWrap: "wrap",
-          justifyContent: "center",
-          marginTop: 50,
-        }}
-      >
-        {characterList.items.results.map((character) => {
-          return (
-            <ContainerCards key={character.id}>
-              <CardCSS>
-                <ImageCharacter
-                  src={character.image}
-                  alt={character.name}
-                  onClick={() => {
-                    navigate(`/character/${character.id}`);
-                  }}
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: 5,
-                  }}
-                >
-                  <h4>
-                    <b>{character.name}</b>
-                  </h4>
-
-                  <ButtonCSS
-                    typeCSS="FAVORITE"
-                    onClick={() => {
-                      if (idsFavoriteCharacter.includes(character.id)) {
-                        handleFavoriteCharacter(character, "DESFAVORITAR");
-                      } else {
-                        handleFavoriteCharacter(character, "FAVORITAR");
-                      }
-                    }}
-                  >
-                    <Heart
-                      size={32}
-                      color="#b4211f"
-                      weight={
-                        idsFavoriteCharacter.includes(character.id)
-                          ? "fill"
-                          : "regular"
-                      }
-                    />
-                  </ButtonCSS>
-                </div>
-              </CardCSS>
-            </ContainerCards>
-          );
-        })}
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          gap: 10,
-          justifyContent: "end",
-          padding: "50px 25px 25px",
-        }}
-      >
-        <ButtonCSS
-          onClick={(e) => {
-            e.preventDefault();
-            handleChangePrevList();
-          }}
-          disabled={!characterList.items.info?.prev}
-        >
-          Previous
-        </ButtonCSS>
-        <ButtonCSS
-          typeCSS="PRIMARY"
-          onClick={(e) => {
-            e.preventDefault();
-            handleChangeNextList();
-          }}
-          disabled={!characterList.items.info?.next}
-        >
-          Next
-        </ButtonCSS>
-      </div>
-    </>
-  );
 }
