@@ -44,7 +44,15 @@ export function DetailCharacter() {
           <ImgDetailCharacter src={data?.image} alt={data?.name} />
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <div>
+          <div
+            style={{
+              width: "32vh",
+              display: "flex",
+              flexDirection: "column",
+              gap: 10,
+              padding: 5,
+            }}
+          >
             <TextDetailCharacter>Nome: {data?.name}</TextDetailCharacter>
             <TextDetailCharacter>Genero: {data?.gender}</TextDetailCharacter>
             <TextDetailCharacter>Especie: {data?.species}</TextDetailCharacter>
