@@ -8,3 +8,4 @@ export const TextCard = styled.h4`
     max-width: 100px;
   }
 `;
+
