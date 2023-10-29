@@ -5,4 +5,8 @@ export const ContainerCards = styled.div`
   flex-direction: column;
   gap: 5px;
   justify-content: center;
+
+  @media screen and (max-width: 500px) {
+    width: 80%;
+  }
 `;

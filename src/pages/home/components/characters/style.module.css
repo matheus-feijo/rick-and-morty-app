@@ -39,3 +39,15 @@
     font-weight: bold;
 
 }
+
+
+@media screen and (max-width:500px){
+    .container-change-page{
+        justify-content: center;
+    }
+
+    .cotnainer{
+        margin-top: 0px;
+    }
+
+}

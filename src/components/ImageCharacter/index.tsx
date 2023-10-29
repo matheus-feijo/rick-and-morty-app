@@ -9,8 +9,8 @@ export const ImageCharacter = styled.img`
     opacity: 0.7;
   }
 
-  @media (max-width: 400px) {
-    width: 150px;
-    height: 150px;
+  @media (max-width: 500px) {
+    width: 100%;
+    height: 200px;
   }
 `;

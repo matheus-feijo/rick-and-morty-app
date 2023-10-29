@@ -9,4 +9,5 @@ export const CardCSS = styled.div<ICardCharacterProps>`
   text-align: center;
   padding: 10px;
   border-radius: 8px;
+
 `;
