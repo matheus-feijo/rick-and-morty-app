@@ -1,5 +1,5 @@
 import { Characters } from "./components/characters";
-import { Filter } from "../../components/Filter";
+import { Filter } from "./components/Filter";
 import { useState } from "react";
 import { IFilter } from "../../interfaces/IFilter";
 import { useDispatch, useSelector } from "react-redux";
@@ -123,7 +123,7 @@ export function Home() {
 
       <div>
         <p style={{ paddingLeft: "2%", color: "#FFFF" }}>
-          Filtros Aplicados: {filtro.name && "name"} {filtro.gender && "gender"}{" "}
+          {filtro.name && "name"} {filtro.gender && "gender"}{" "}
           {filtro.species && "species"}
           {filtro.status && "status"} {filtro.type && "type"}
         </p>
@@ -139,6 +139,9 @@ export function Home() {
           </ButtonCSS>
         </div>
       )}
+
+    
+
       <Characters
         pageSelect={pageSelect}
         handleChangeNextList={handleChangeNextList}

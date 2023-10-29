@@ -14,6 +14,9 @@ import { CardCSS } from "../../../../components/CardCSS";
 import { ImageCharacter } from "../../../../components/ImageCharacter";
 import { ContainerCards } from "../../../../components/ContainerCards";
 import { TextCard } from "../../../../components/TextCard";
+import { ButtonListCharacterCSS } from "./styled";
+import styles from "./style.module.css";
+import { Spin } from "antd";
 interface ICharacterAPI {
   info: IDadosCharacters;
   results: ICharacter[];
@@ -50,31 +53,14 @@ export function Characters({
 
   if (status === "loading" || status === "idle") {
     return (
-      <div
-        style={{
-          height: "90vh",
-          placeItems: "center",
-          display: "grid",
-          color: "#ffff",
-          fontSize: 60,
-        }}
-      >
-        <p>Carregando...</p>
+      <div className={styles["container-loading"]}>
+        <Spin />
       </div>
     );
   } else if (status === "success") {
     return (
       <>
-        <div
-          style={{
-            display: "flex",
-            gap: 20,
-            flexWrap: "wrap",
-            justifyContent: "center",
-            marginTop: 50,
-            padding: 20,
-          }}
-        >
+        <div className={styles["cotnainer"]}>
           {characterList.items.results.map((character) => {
             return (
               <ContainerCards key={character.id}>
@@ -86,14 +72,7 @@ export function Characters({
                       navigate(`/character/${character.id}`);
                     }}
                   />
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: 5,
-                    }}
-                  >
+                  <div>
                     <TextCard>
                       <b>{character.name}</b>
                     </TextCard>
@@ -125,15 +104,15 @@ export function Characters({
           })}
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            gap: 10,
-            justifyContent: "end",
-            padding: "50px 25px 25px",
-          }}
-        >
-          <ButtonCSS
+        <div className={styles["pagina-numeration"]}>
+          <span>
+            Page {pageSelect.split("=")[1] || 1}/
+            {characterList.items.info?.pages}
+          </span>
+        </div>
+
+        <div className={styles["container-change-page"]}>
+          <ButtonListCharacterCSS
             onClick={(e) => {
               e.preventDefault();
               handleChangePrevList();
@@ -141,9 +120,9 @@ export function Characters({
             disabled={!characterList.items.info?.prev}
           >
             Previous
-          </ButtonCSS>
-          <ButtonCSS
-            typeCSS="PRIMARY"
+          </ButtonListCharacterCSS>
+
+          <ButtonListCharacterCSS
             onClick={(e) => {
               e.preventDefault();
               handleChangeNextList();
@@ -151,22 +130,14 @@ export function Characters({
             disabled={!characterList.items.info?.next}
           >
             Next
-          </ButtonCSS>
+          </ButtonListCharacterCSS>
         </div>
       </>
     );
   } else {
     return (
-      <div
-        style={{
-          height: "90vh",
-          placeItems: "center",
-          display: "grid",
-          color: "#ffff",
-          fontSize: 50,
-        }}
-      >
-        <p>Erro ao carregar Lista de Personagens</p>
+      <div className={styles["container-error"]}>
+        <span>Erro ao carregar Lista de Personagens</span>
       </div>
     );
   }

@@ -5,7 +5,7 @@ interface ICardCharacterProps {
 }
 
 export const CardCSS = styled.div<ICardCharacterProps>`
-  background-color: #ffff;
+  background-color: #000000;
   text-align: center;
   padding: 10px;
   border-radius: 8px;

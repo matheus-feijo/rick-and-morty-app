@@ -1,12 +1,16 @@
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { ButtonCSS } from "../../components/ButtonCSS";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { api } from "../../services/api";
 import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";
-import { ImgDetailCharacter, TextDetailCharacter } from "./styled";
+import {
+  ButtonDetailCharacterCSS,
+  ImgDetailCharacter,
+  TextDetailCharacter,
+} from "./styled";
 import moment from "moment";
+import styles from "./styles.module.css";
 
 export function DetailCharacter() {
   const { id } = useParams();
@@ -21,15 +25,7 @@ export function DetailCharacter() {
 
   if (status === "loading" || status === "idle") {
     return (
-      <div
-        style={{
-          height: "90vh",
-          placeItems: "center",
-          display: "grid",
-          color: "#ffff",
-          fontSize: 60,
-        }}
-      >
+      <div className={styles["container-loading"]}>
         <p>Carregando...</p>
       </div>
     );
@@ -37,7 +33,9 @@ export function DetailCharacter() {
     return (
       <div>
         <div style={{ padding: 20 }}>
-          <ButtonCSS onClick={() => history.go(-1)}>Voltar</ButtonCSS>
+          <ButtonDetailCharacterCSS onClick={() => history.go(-1)}>
+            Voltar
+          </ButtonDetailCharacterCSS>
         </div>
 
         <div style={{ textAlign: "center" }}>
@@ -78,7 +76,9 @@ export function DetailCharacter() {
   } else {
     return (
       <div style={{ padding: "20px 0px 0px 20px" }}>
-        <ButtonCSS onClick={() => history.go(-1)}> Voltar</ButtonCSS>
+        <ButtonDetailCharacterCSS onClick={() => history.go(-1)}>
+          Voltar
+        </ButtonDetailCharacterCSS>
       </div>
     );
   }

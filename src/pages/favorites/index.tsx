@@ -13,6 +13,7 @@ import { CardCSS } from "../../components/CardCSS";
 import { ImageCharacter } from "../../components/ImageCharacter";
 import { ContainerCards } from "../../components/ContainerCards";
 import { TextCard } from "../../components/TextCard";
+import styles from "./style.module.css";
 
 export function Favorites() {
   const favoriteCharacterList = useSelector(getAllFavoriteCharacters);
@@ -32,16 +33,7 @@ export function Favorites() {
         <TitlePage>Favoritos</TitlePage>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          gap: 20,
-          flexWrap: "wrap",
-          justifyContent: "center",
-          marginTop: 50,
-          padding: 20,
-        }}
-      >
+      <div className={styles.container}>
         {favoriteCharacterList.map((character) => {
           return (
             <ContainerCards key={character.id}>
@@ -53,14 +45,7 @@ export function Favorites() {
                     navigate(`/character/${character.id}`);
                   }}
                 />
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: 5,
-                  }}
-                >
+                <div>
                   <TextCard>
                     <b>{character.name}</b>
                   </TextCard>

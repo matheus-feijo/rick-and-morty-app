@@ -1,8 +1,9 @@
 import { Funnel } from "@phosphor-icons/react";
 import { Drawer, Form, Radio, Input, Tooltip } from "antd";
 import { useState } from "react";
-import { IFilter } from "../../interfaces/IFilter";
-import { ButtonCSS } from "../ButtonCSS";
+import { IFilter } from "../../../../interfaces/IFilter";
+import { ButtonCSS } from "../../../../components/ButtonCSS";
+import { ButtonFiltroCSS, TitleDrawerCSS } from "./styled";
 
 export function Filter({
   handleChangeFilter,
@@ -41,9 +42,9 @@ export function Filter({
   return (
     <div style={{ padding: "50px 0px 20px 50px" }}>
       <Tooltip title="Filtro">
-        <ButtonCSS typeCSS="ICON" id="filtro" onClick={showDrawer}>
+        <ButtonFiltroCSS onClick={showDrawer}>
           <Funnel size={32} />
-        </ButtonCSS>
+        </ButtonFiltroCSS>
       </Tooltip>
 
       <Form
@@ -52,7 +53,12 @@ export function Filter({
         onFinish={onFinish}
         form={formFiltro}
       >
-        <Drawer title="Filtro" placement="right" onClose={onClose} open={open}>
+        <Drawer
+          title={<TitleDrawerCSS>Filtro</TitleDrawerCSS>}
+          placement="right"
+          onClose={onClose}
+          open={open}
+        >
           <Form.Item label="Nome" name="name">
             <Input data-testid="name-test" />
           </Form.Item>

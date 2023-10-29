@@ -4,7 +4,7 @@
 import { render, fireEvent } from "@testing-library/react";
 import { it, describe, expect } from "vitest";
 import { Filter } from ".";
-import { IFilter } from "../../interfaces/IFilter";
+import { IFilter } from "../../../../interfaces/IFilter";
 
 describe("Filtro de personagens", () => {
   let objFiltro = {};
