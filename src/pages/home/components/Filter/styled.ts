@@ -15,3 +15,8 @@ export const TitleDrawerCSS = styled.h1`
   font-weight: 400;
   font-size: 26px;
 `;
+
+export const LabelCSS = styled.span`
+  color: #82ff06;
+  padding-bottom: 2px;
+`;

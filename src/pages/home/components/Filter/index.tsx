@@ -1,9 +1,12 @@
 import { Funnel } from "@phosphor-icons/react";
-import { Drawer, Form, Radio, Input, Tooltip } from "antd";
+import { Drawer, Form, Radio, Input, Tooltip, message } from "antd";
 import { useState } from "react";
 import { IFilter } from "../../../../interfaces/IFilter";
-import { ButtonCSS } from "../../../../components/ButtonCSS";
-import { ButtonFiltroCSS, TitleDrawerCSS } from "./styled";
+import styles from "./style.module.css";
+import { ButtonFiltroCSS, LabelCSS, TitleDrawerCSS } from "./styled";
+
+type Status = "alive" | "dead" | "unknown" | "";
+type Gender = "female" | "male" | "genderless" | "unknown" | "";
 
 export function Filter({
   handleChangeFilter,
@@ -11,7 +14,13 @@ export function Filter({
   handleChangeFilter: (filtro: IFilter) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const [formFiltro] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const [name, setName] = useState("");
+  const [gender, setGender] = useState<Gender>("");
+  const [specie, setSpecie] = useState("");
+  const [type, setType] = useState("");
+  const [status, setStatus] = useState<Status>("");
 
   const showDrawer = () => {
     setOpen(true);
@@ -21,78 +30,103 @@ export function Filter({
     setOpen(false);
   };
 
-  const onFinish = (values: any) => {
-    if (Object.values(values).filter((value) => !value).length === 5) {
-      alert("Preencha ao menos algum campo para aplicar filtro");
+  const handleSubmit = () => {
+    if (!name && !gender && !specie && !type && !status) {
+      messageApi.error(
+        "Coloque ao menos uma informação para poder aplicar o filtro"
+      );
       return;
     }
 
     handleChangeFilter({
-      name: values.name || "",
-      status: values.status || "",
-      species: values.specie || "",
-      gender: values.gender || "",
-      type: values.type || "",
+      name: name || "",
+      status: status || "",
+      species: specie || "",
+      gender: gender || "",
+      type: type || "",
     });
 
     onClose();
-    formFiltro.resetFields();
   };
 
   return (
-    <div style={{ padding: "50px 0px 20px 50px" }}>
+    <div>
+      {contextHolder}
       <Tooltip title="Filtro">
         <ButtonFiltroCSS onClick={showDrawer}>
           <Funnel size={32} />
         </ButtonFiltroCSS>
       </Tooltip>
 
-      <Form
-        id="form-filtro"
-        layout="vertical"
-        onFinish={onFinish}
-        form={formFiltro}
+      <Drawer
+        title={<TitleDrawerCSS>Filtro</TitleDrawerCSS>}
+        placement="right"
+        onClose={onClose}
+        open={open}
       >
-        <Drawer
-          title={<TitleDrawerCSS>Filtro</TitleDrawerCSS>}
-          placement="right"
-          onClose={onClose}
-          open={open}
-        >
-          <Form.Item label="Nome" name="name">
-            <Input data-testid="name-test" />
-          </Form.Item>
-          <Form.Item label="Especie" name="specie">
-            <Input />
-          </Form.Item>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <div className={styles["input-container"]}>
+            <LabelCSS>Nome:</LabelCSS>
+            <Input
+              className={styles.input}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
-          <Form.Item label="Tipo" name="type">
-            <Input />
-          </Form.Item>
+          <div className={styles["input-container"]}>
+            <LabelCSS>Especie:</LabelCSS>
+            <Input
+              className={styles.input}
+              value={specie}
+              onChange={(e) => setSpecie(e.target.value)}
+            />
+          </div>
 
-          <Form.Item label="Status" name="status">
-            <Radio.Group>
+          <div className={styles["input-container"]}>
+            <LabelCSS>Tipo:</LabelCSS>
+            <Input
+              className={styles.input}
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            />
+          </div>
+
+          <div className={styles["input-container"]}>
+            <LabelCSS>Status:</LabelCSS>
+            <Radio.Group
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
               <Radio value={"alive"}>Alive</Radio>
               <Radio value={"dead"}>Dead</Radio>
               <Radio value={"unknown"}>Unknown</Radio>
             </Radio.Group>
-          </Form.Item>
-          <Form.Item label="Genero" name="gender">
-            <Radio.Group>
+          </div>
+
+          <div className={styles["input-container"]}>
+            <LabelCSS>Genero:</LabelCSS>
+            <Radio.Group
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            >
               <Radio value={"female"}>Female</Radio>
               <Radio value={"male"}>Male</Radio>
               <Radio value={"genderless"}>Genderless</Radio>
               <Radio value={"unknown"}>Unknown</Radio>
             </Radio.Group>
-          </Form.Item>
-
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <ButtonCSS type="submit" form="form-filtro" submit>
-              Aplicar filtro
-            </ButtonCSS>
           </div>
-        </Drawer>
-      </Form>
+
+          <div className={styles["container-aplica-filtro"]}>
+            <button
+              className={styles["button-aplica-filtro"]}
+              onClick={handleSubmit}
+            >
+              Aplicar Filtro
+            </button>
+          </div>
+        </div>
+      </Drawer>
     </div>
   );
 }

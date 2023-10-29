@@ -49,6 +49,7 @@ export function Characters({
 
   useEffect(() => {
     refetch();
+    console.log("DSAD");
   }, [pageSelect]);
 
   if (status === "loading" || status === "idle") {

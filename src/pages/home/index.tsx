@@ -9,7 +9,7 @@ import { characterAction } from "../../store/actions/characterAction";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAction";
 import logo from "../../assets/rick-and-morty.png";
-import { ButtonCSS } from "../../components/ButtonCSS";
+import styles from "./styles.module.css";
 import { ImgTitle } from "./styled";
 
 export function Home() {
@@ -119,28 +119,32 @@ export function Home() {
         <ImgTitle src={logo} alt="logo" />
       </div>
 
-      <Filter handleChangeFilter={handleChangeFilter} />
+      <div style={{ display: "flex", gap: 20, padding: "20px 50px" }}>
+        <Filter handleChangeFilter={handleChangeFilter} />
 
-      <div>
-        <p style={{ paddingLeft: "2%", color: "#FFFF" }}>
-          {filtro.name && "name"} {filtro.gender && "gender"}{" "}
+        <p
+          style={{ display: "flex", alignItems: "center", fontWeight: "bold" }}
+        >
+          Filtro Aplicado: {filtro.name && "name"} {filtro.gender && "gender"}{" "}
           {filtro.species && "species"}
           {filtro.status && "status"} {filtro.type && "type"}
         </p>
-      </div>
-      {(filtro.name ||
-        filtro.gender ||
-        filtro.species ||
-        filtro.status ||
-        filtro.type) && (
-        <div style={{ paddingLeft: "2%", paddingTop: 25 }}>
-          <ButtonCSS onClick={handleRemoveFilter} typeCSS="DANGER">
-            Remover Filtro
-          </ButtonCSS>
-        </div>
-      )}
 
-    
+        {(filtro.name ||
+          filtro.gender ||
+          filtro.species ||
+          filtro.status ||
+          filtro.type) && (
+          <div className={styles["container-remover-filtro"]}>
+            <button
+              className={styles["button-remove-filtro"]}
+              onClick={handleRemoveFilter}
+            >
+              Remover Filtro
+            </button>
+          </div>
+        )}
+      </div>
 
       <Characters
         pageSelect={pageSelect}
