@@ -2,6 +2,7 @@ import { Layout, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 
 export function TheHeader() {
+  const menuSelected = window.location.pathname;
   const navigate = useNavigate();
 
   return (
@@ -16,7 +17,7 @@ export function TheHeader() {
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={["0"]}
+            selectedKeys={menuSelected === "/" ? ["0"] : ["1"]}
             items={[
               {
                 key: 0,

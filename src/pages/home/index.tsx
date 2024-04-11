@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import logo from "../../assets/rick-and-morty.png";
 import { apiService } from "../../services/api";
-import { Button, Card, Pagination, Result, Spin } from "antd";
+import { Button, Card, Divider, Pagination, Result, Spin } from "antd";
 import { HeartOutlined, LoadingOutlined } from "@ant-design/icons";
 import { useNotify } from "../../hooks/useNotify";
 import { useCharacter } from "../../hooks/useCharacter";
@@ -85,6 +85,8 @@ export function Home() {
             height: 100,
           }}
         />
+
+        <Divider />
 
         <div>
           {status === "loading" && (
