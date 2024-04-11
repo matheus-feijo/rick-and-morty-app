@@ -1,13 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "..";
-import { ICharacter } from "../../interfaces/ICharacter";
-import { IDadosCharacters } from "../../interfaces/IDadosCharacters";
+import { IResponseCharacter } from "../../interfaces/IResponseCharacter";
 
 interface ICharacterSlice {
-  items: {
-    info: IDadosCharacters | null;
-    results: ICharacter[];
-  };
+  items: IResponseCharacter;
 }
 
 const initialState: ICharacterSlice = {

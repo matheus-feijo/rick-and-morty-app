@@ -1,157 +1,176 @@
-import { Characters } from "./components/characters";
-import { Filter } from "./components/Filter";
-import { useState } from "react";
-import { IFilter } from "../../interfaces/IFilter";
-import { useDispatch, useSelector } from "react-redux";
-import { getCharacters } from "../../store/reducers/characterSlice";
-import { api } from "../../services/api";
-import { characterAction } from "../../store/actions/characterAction";
-import { ICharacter } from "../../interfaces/ICharacter";
-import { favoriteCharacterAction } from "../../store/actions/favoriteCharacterAction";
+import { useQuery } from "react-query";
 import logo from "../../assets/rick-and-morty.png";
-import styles from "./styles.module.css";
-import { ImgTitle } from "./styled";
+import { apiService } from "../../services/api";
+import { Button, Card, Pagination, Result, Spin } from "antd";
+import { HeartOutlined, LoadingOutlined } from "@ant-design/icons";
+import { useNotify } from "../../hooks/useNotify";
+import { useCharacter } from "../../hooks/useCharacter";
+import { ICharacter } from "../../interfaces/ICharacter";
+import { Heart } from "@phosphor-icons/react";
+import { ButtonCSS } from "../../components/ButtonCSS";
+import { useEffect, useState } from "react";
 
 export function Home() {
-  const [pageSelect, setPageSelect] = useState("");
-  const [filtro, setFiltro] = useState<IFilter>({
-    name: "",
-    status: "",
-    gender: "",
-    species: "",
-    type: "",
+  const { contextholderNotification, openNotification } = useNotify();
+  const {
+    adicionarPersonagens,
+    personagens,
+    favoritarPersonagem,
+    removerFavorito,
+    personagensFavoritos,
+  } = useCharacter();
+
+  const [pageSelected, setPageSelected] = useState(1);
+
+  const {
+    data: characters,
+    status,
+    refetch,
+  } = useQuery({
+    queryFn: () => apiService.getAllCharacter(pageSelected),
+    queryKey: ["CHARACTER_ALL"],
+    onSuccess: (data) => {
+      console.log(data);
+      adicionarPersonagens(data);
+    },
   });
 
-  const characterList = useSelector(getCharacters);
-  const appDispatch = useDispatch();
-  const { addCharacters } = characterAction;
-  const { addFavoriteCharacter, removeFavoriteCharacter } =
-    favoriteCharacterAction;
-
-  const handleChangeNextList = () => {
-    if (characterList.items.info?.next) {
-      setPageSelect(characterList.items.info.next.slice(42));
-    }
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  const handleChangePrevList = () => {
-    if (characterList.items.info?.prev) {
-      setPageSelect(characterList.items.info?.prev.slice(42));
-    }
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  const handleChangeFilter = async (filtro: IFilter) => {
-    const params = new URLSearchParams();
-
-    if (filtro.name) {
-      params.append("name", filtro.name);
-    }
-
-    if (filtro.status) {
-      params.append("status", filtro.status);
-    }
-
-    if (filtro.gender) {
-      params.append("gender", filtro.gender);
-    }
-
-    if (filtro.species) {
-      params.append("species", filtro.species);
-    }
-
-    if (filtro.type) {
-      params.append("type", filtro.type);
-    }
-
-    setFiltro(filtro);
-
-    try {
-      await api.get(`/character/?${params.toString()}`).then((res) => {
-        // console.log(res.data);
-        appDispatch(addCharacters(res.data));
+  const handleChangeFavorite = (character: ICharacter) => {
+    //DESFAVORITAR AO CLICAR EM PERSONAGEM JA FAVORITADO
+    if (personagensFavoritos.find((value) => value.id === character.id)) {
+      removerFavorito(character.id);
+      openNotification({
+        type: "success",
+        message: `Personagem ${character.name} Removido dos favoritos com sucesso!`,
       });
-    } catch (error) {
-      throw new Error("Erro na atualização dos personagens pelo filtro:");
-    }
-  };
-
-  const handleRemoveFilter = () => {
-    setFiltro({
-      name: "",
-      status: "",
-      gender: "",
-      species: "",
-      type: "",
-    });
-
-    api.get("/character").then((res) => {
-      appDispatch(addCharacters(res.data));
-    });
-  };
-
-  const handleFavoriteCharacter = (character: ICharacter, action: string) => {
-    if (action === "FAVORITAR") {
-      appDispatch(addFavoriteCharacter(character));
       return;
     }
 
-    if (action === "DESFAVORITAR") {
-      appDispatch(removeFavoriteCharacter(character.id));
-    }
+    favoritarPersonagem(character);
+    //
+
+    openNotification({
+      type: "success",
+      message: `Personagem ${character.name} favoritado com sucesso!`,
+    });
   };
 
+  const handleChangePage = (page: number, pageSize: number) => {
+    //VERIFICAR SE É ANTERIOR OU PROXIMA PAGINA
+    setPageSelected(page);
+    localStorage.setItem("page", page.toString());
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [pageSelected]);
+
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        width: "100%",
-      }}
-    >
-      <div style={{ textAlign: "center", paddingTop: 50 }}>
-        <ImgTitle src={logo} alt="logo" />
-      </div>
+    <>
+      {contextholderNotification}
+      <div
+        style={{
+          padding: 20,
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: 20,
+          height: "90vh",
+        }}
+      >
+        <img
+          src={logo}
+          style={{
+            width: 350,
+            height: 100,
+          }}
+        />
 
-      <div style={{ display: "flex", gap: 20, padding: "20px 50px" }}>
-        <Filter handleChangeFilter={handleChangeFilter} />
-
-        <p
-          style={{ display: "flex", alignItems: "center", fontWeight: "bold" }}
-        >
-          Filtro Aplicado: {filtro.name && "name"} {filtro.gender && "gender"}{" "}
-          {filtro.species && "species"}
-          {filtro.status && "status"} {filtro.type && "type"}
-        </p>
-
-        {(filtro.name ||
-          filtro.gender ||
-          filtro.species ||
-          filtro.status ||
-          filtro.type) && (
-          <div className={styles["container-remover-filtro"]}>
-            <button
-              className={styles["button-remove-filtro"]}
-              onClick={handleRemoveFilter}
+        <div>
+          {status === "loading" && (
+            <div
+              style={{
+                minHeight: "40vh",
+                display: "flex",
+                alignItems: "center",
+              }}
             >
-              Remover Filtro
-            </button>
-          </div>
-        )}
-      </div>
+              <Spin
+                indicator={<LoadingOutlined style={{ fontSize: 96 }} spin />}
+              />
+            </div>
+          )}
 
-      <Characters
-        pageSelect={pageSelect}
-        handleChangeNextList={handleChangeNextList}
-        handleChangePrevList={handleChangePrevList}
-        handleFavoriteCharacter={handleFavoriteCharacter}
-      />
-    </div>
+          {status === "error" && (
+            <Result
+              status="error"
+              title="Erro ao Listar Personagens"
+              subTitle="Por favor tente novamente mais tarde"
+            />
+          )}
+
+          {status === "success" && (
+            <div style={{ paddingBottom: 40, paddingLeft: 40 }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "start",
+                  gap: 10,
+                  flexWrap: "wrap",
+                }}
+              >
+                {personagens.items.results.map((character) => {
+                  return (
+                    <Card
+                      key={character.id}
+                      hoverable
+                      style={{ width: 240 }}
+                      cover={<img alt={character.name} src={character.image} />}
+                    >
+                      <Card.Meta
+                        title={character.name}
+                        description={
+                          <ButtonCSS
+                            onClick={() => handleChangeFavorite(character)}
+                          >
+                            <Heart
+                              size={32}
+                              color="#b4211f"
+                              weight={
+                                personagensFavoritos.find(
+                                  (value) => value.id === character.id
+                                )
+                                  ? "fill"
+                                  : "regular"
+                              }
+                            />
+                          </ButtonCSS>
+                        }
+                      />
+                    </Card>
+                  );
+                })}
+              </div>
+
+              <div
+                style={{
+                  padding: 20,
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Pagination
+                  current={pageSelected}
+                  size="default"
+                  pageSize={20}
+                  total={personagens.items.info?.count}
+                  onChange={handleChangePage}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
   );
 }

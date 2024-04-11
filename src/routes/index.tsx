@@ -9,28 +9,7 @@ import locale from "antd/lib/locale/pt_BR";
 export function Routers() {
   return (
     <BrowserRouter>
-      <ConfigProvider
-        locale={locale}
-        theme={{
-          components: {
-            Radio: {
-              colorText: "#FFF",
-              colorPrimaryActive: "rgb(130, 255, 6)",
-              colorPrimary: "rgb(130, 255, 6)",
-            },
-            Drawer: {
-              colorBgElevated: "black",
-              colorIcon: "rgb(130, 255, 6)",
-              colorIconHover: "rgb(130, 255, 6)",
-              colorInfoTextActive: "#FFFF",
-            },
-            Input: {
-              hoverBorderColor: "rgb(130,255,6)",
-              activeBorderColor: "rgb(130,255,6)",
-            },
-          },
-        }}
-      >
+      <ConfigProvider locale={locale}>
         <TheHeader />
         <Routes>
           <Route path="/" element={<Home />} />
