@@ -6,9 +6,9 @@ export const api = axios.create({
 });
 
 export const apiService = {
-  getAllCharacter: async (page: number) => {
+  getAllCharacter: async (params: string) => {
     const { data }: { data: IResponseCharacter } = await api.get(
-      `/character?page=${page}`
+      `/character?${params}`
     );
     return data;
   },

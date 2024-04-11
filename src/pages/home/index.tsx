@@ -9,6 +9,8 @@ import { ICharacter } from "../../interfaces/ICharacter";
 import { Heart } from "@phosphor-icons/react";
 import { ButtonCSS } from "../../components/ButtonCSS";
 import { useEffect, useState } from "react";
+import { Filtro } from "./components/Filtro";
+import styles from "./styles.module.css";
 
 export function Home() {
   const { contextholderNotification, openNotification } = useNotify();
@@ -20,17 +22,22 @@ export function Home() {
     personagensFavoritos,
   } = useCharacter();
 
+  const [params, setParams] = useState("");
   const [pageSelected, setPageSelected] = useState(1);
 
   const {
     data: characters,
-    status,
     refetch,
+    isLoading,
+    isFetched,
+    isSuccess,
+    isError,
+    isRefetching,
   } = useQuery({
-    queryFn: () => apiService.getAllCharacter(pageSelected),
+    queryFn: () => apiService.getAllCharacter(params),
     queryKey: ["CHARACTER_ALL"],
     onSuccess: (data) => {
-      console.log(data);
+      // console.log(data);
       adicionarPersonagens(data);
     },
   });
@@ -57,39 +64,49 @@ export function Home() {
 
   const handleChangePage = (page: number, pageSize: number) => {
     //VERIFICAR SE É ANTERIOR OU PROXIMA PAGINA
-    setPageSelected(page);
+    const newParams = new URLSearchParams(params);
+    newParams.delete("page");
+    newParams.append("page", page.toString());
+
+    setParams(newParams.toString());
     localStorage.setItem("page", page.toString());
+
+    setPageSelected(page);
   };
 
   useEffect(() => {
+    // console.log("opa");
     refetch();
-  }, [pageSelected]);
+  }, [params]);
 
   return (
     <>
       {contextholderNotification}
-      <div
-        style={{
-          padding: 20,
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          gap: 20,
-          height: "90vh",
-        }}
-      >
-        <img
-          src={logo}
-          style={{
-            width: 350,
-            height: 100,
-          }}
-        />
+      <div className={styles.container}>
+        <img src={logo} className={styles["imagem-titulo"]} />
 
         <Divider />
 
+        <div style={{ width: "100%", paddingLeft: 20 }}>
+          <Filtro
+            setParams={setParams}
+            params={params}
+            restartPageSelected={() => {
+              setPageSelected(1);
+            }}
+          />
+        </div>
+
         <div>
-          {status === "loading" && (
+          {isError && !(isLoading || isRefetching) && (
+            <Result
+              status="error"
+              title="Erro ao Listar Personagens"
+              subTitle="Por favor tente novamente mais tarde"
+            />
+          )}
+
+          {(isLoading || isRefetching) && (
             <div
               style={{
                 minHeight: "40vh",
@@ -103,56 +120,52 @@ export function Home() {
             </div>
           )}
 
-          {status === "error" && (
-            <Result
-              status="error"
-              title="Erro ao Listar Personagens"
-              subTitle="Por favor tente novamente mais tarde"
-            />
-          )}
-
-          {status === "success" && (
+          {isSuccess && !isRefetching && (
             <div style={{ paddingBottom: 40, paddingLeft: 40 }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "start",
-                  gap: 10,
-                  flexWrap: "wrap",
-                }}
-              >
-                {personagens.items.results.map((character) => {
-                  return (
-                    <Card
-                      key={character.id}
-                      hoverable
-                      style={{ width: 240 }}
-                      cover={<img alt={character.name} src={character.image} />}
-                    >
-                      <Card.Meta
-                        title={character.name}
-                        description={
-                          <ButtonCSS
-                            onClick={() => handleChangeFavorite(character)}
-                          >
-                            <Heart
-                              size={32}
-                              color="#b4211f"
-                              weight={
-                                personagensFavoritos.find(
-                                  (value) => value.id === character.id
-                                )
-                                  ? "fill"
-                                  : "regular"
-                              }
-                            />
-                          </ButtonCSS>
+              {isFetched && !isError && (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "start",
+                    gap: 10,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {personagens.items.results.map((character) => {
+                    return (
+                      <Card
+                        key={character.id}
+                        hoverable
+                        style={{ width: 240 }}
+                        cover={
+                          <img alt={character.name} src={character.image} />
                         }
-                      />
-                    </Card>
-                  );
-                })}
-              </div>
+                      >
+                        <Card.Meta
+                          title={character.name}
+                          description={
+                            <ButtonCSS
+                              onClick={() => handleChangeFavorite(character)}
+                            >
+                              <Heart
+                                size={32}
+                                color="#b4211f"
+                                weight={
+                                  personagensFavoritos.find(
+                                    (value) => value.id === character.id
+                                  )
+                                    ? "fill"
+                                    : "regular"
+                                }
+                              />
+                            </ButtonCSS>
+                          }
+                        />
+                      </Card>
+                    );
+                  })}
+                </div>
+              )}
 
               <div
                 style={{
