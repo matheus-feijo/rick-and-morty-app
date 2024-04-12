@@ -22,7 +22,9 @@ export function DetailCharacter() {
   } else if (status === "success") {
     return (
       <div>
-        <Typography.Title style={{ textAlign: "center", paddingTop: 20 }}>
+        <Typography.Title
+          style={{ textAlign: "center", paddingTop: 20, color: "#FFFF" }}
+        >
           {character.name}
         </Typography.Title>
         <Divider />
@@ -34,10 +36,18 @@ export function DetailCharacter() {
             style={{ borderRadius: "4px" }}
           />
 
-          <Typography>Especie: {character.species}</Typography>
-          <Typography>Status: {character.status}</Typography>
-          <Typography>Genero: {character.gender}</Typography>
-          <Typography>Episodios: {character.episode.length}</Typography>
+          <Typography style={{ color: "#FFFF" }}>
+            Especie: {character.species}
+          </Typography>
+          <Typography style={{ color: "#FFFF" }}>
+            Status: {character.status}
+          </Typography>
+          <Typography style={{ color: "#FFFF" }}>
+            Genero: {character.gender}
+          </Typography>
+          <Typography style={{ color: "#FFFF" }}>
+            Episodios: {character.episode.length}
+          </Typography>
         </div>
 
         <div className={styles["container-info"]} style={{ paddingTop: 20 }}>

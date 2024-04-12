@@ -84,7 +84,7 @@ export function Home() {
       <div className={styles.container}>
         <img src={logo} className={styles["imagem-titulo"]} />
 
-        <Divider />
+        <Divider style={{ backgroundColor: "#FFFF", opacity: 0.2 }} />
 
         <div style={{ width: "100%", paddingLeft: 20 }}>
           <Filtro
@@ -151,6 +151,7 @@ export function Home() {
                 }}
               >
                 <Pagination
+                  style={{ color: "#FFFF" }}
                   current={pageSelected}
                   size="default"
                   pageSize={20}

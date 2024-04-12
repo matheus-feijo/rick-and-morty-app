@@ -26,7 +26,9 @@ export function Favorites() {
       }}
     >
       {contextholderNotification}
-      <Typography.Title level={1}>Favoritos</Typography.Title>
+      <Typography.Title level={1} style={{ color: "#FFFF" }}>
+        Favoritos
+      </Typography.Title>
       <Divider />
 
       <div style={{ paddingBottom: 40, paddingLeft: 40 }}>

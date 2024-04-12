@@ -84,7 +84,7 @@ export function Filtro({
 
   return (
     <>
-      <Typography.Title>Filtro</Typography.Title>
+      <Typography.Title style={{ color: "#FFFF" }}>Filtro</Typography.Title>
 
       <div
         style={{
@@ -94,7 +94,7 @@ export function Filtro({
         }}
       >
         <div style={{ display: "flex", gap: 5, alignItems: "center" }}>
-          <Typography>Nome:</Typography>
+          <Typography style={{ color: "#FFFF" }}>Nome:</Typography>
           <Input
             placeholder="fulano..."
             style={{ maxWidth: 250 }}
@@ -104,16 +104,30 @@ export function Filtro({
         </div>
 
         <Radio.Group onChange={handleChangeGender} value={genderSelected}>
-          <Radio value={"female"}>Female</Radio>
-          <Radio value={"male"}>Male</Radio>
-          <Radio value={"genderless"}>genderless</Radio>
-          <Radio value={"unknown"}>unknown</Radio>
+          <Radio value={"female"} style={{ color: "#FFFF" }}>
+            Female
+          </Radio>
+          <Radio value={"male"} style={{ color: "#FFFF" }}>
+            Male
+          </Radio>
+          <Radio value={"genderless"} style={{ color: "#FFFF" }}>
+            genderless
+          </Radio>
+          <Radio value={"unknown"} style={{ color: "#FFFF" }}>
+            unknown
+          </Radio>
         </Radio.Group>
 
         <Radio.Group onChange={handleChangeStatus} value={statusSelected}>
-          <Radio value={"alive"}>Alive</Radio>
-          <Radio value={"dead"}>Dead</Radio>
-          <Radio value={"unknown"}>unknown</Radio>
+          <Radio value={"alive"} style={{ color: "#FFFF" }}>
+            Alive
+          </Radio>
+          <Radio value={"dead"} style={{ color: "#FFFF" }}>
+            Dead
+          </Radio>
+          <Radio value={"unknown"} style={{ color: "#FFFF" }}>
+            unknown
+          </Radio>
         </Radio.Group>
 
         <div>

@@ -9,7 +9,28 @@ import locale from "antd/lib/locale/pt_BR";
 export function Routers() {
   return (
     <BrowserRouter>
-      <ConfigProvider locale={locale}>
+      <ConfigProvider
+        locale={locale}
+        theme={{
+          components: {
+            Pagination: {
+              colorText: "#FFFF",
+              colorBgContainerDisabled: "#FFFF",
+              itemSize: 40,
+              colorTextDisabled: "#FFFF",
+            },
+            Spin: {
+              colorPrimary: "#FFFF",
+            },
+            Layout: {
+              headerBg: "#0c1419",
+            },
+            Menu: {
+              darkItemBg: "#0c1419",
+            },
+          },
+        }}
+      >
         <TheHeader />
         <Routes>
           <Route path="/" element={<Home />} />
