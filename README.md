@@ -18,50 +18,32 @@ npm run dev
 npm run test
 ```
 
+### Requisitos Funcionais
+ - [x] Deve ser possivel listar todos os personagens;
+ - [x] Deve ser possivel favoritar personagens;
+ - [x] Deve ser possivel desfavoritar personagens;
+ - [x] Deve ser possivel visualizar detalhes do personagem;
+ - [x] Deve ser possivel Filtrar personagens;
+ - [x] Deve ser possivel remover Filtro;
+ - [x] Deve ser possivel navegar entre personagens e personagens favoritados;
 
+### Regras de negocio
+- [x] Cada pagina deve ter no maximo 20 personagens;
+- [x] Deve ser possivel filtrar personagens em tempo real;
+- [x] Personagens favoritados devem ser persistidos no app;
+- [x] Limpar filtro deve voltar para a primeira pagina da lista de personagens;
 
-
-### Funcionalidades
-
-* Listagem de todos os personagens da obra (limite:20/pagina)
-* Listagem de personagens favoritos
-* Opção de favoritar personagens
-* Visualizar detalhes do personagem
-* Filtrar lista de personagens a partir dos seguintes parametros:
-  * Nome
-  * genero
-  * tipo
-  * status
-  * especie
-
-### Ferramentas utilizadas
-
-* Para desenvolver a aplicação foi utilizado o React com Typescript inicializando com o Vite
-* Para testes foi utilizado vitest
-* Para estilizar alguns componentes foi utilizado o styled-components
-* O antd (biblioteca de UI) foi utilizado para Drawer do Filtro e gerenciar Form
-* Para gerenciamento de estados globais foi utilizado o Redux
-* Para gerenciar rotas foi utilizado o react-router-dom
-* Para gerenciar consumos da API foi utilizado o react-query e o axios
-
+### Requisitos Não funcionais
+- [x] Utilizar Redux para persistir dados;
+- [x] Gerenciar rotas com URLSearchParams;
+- [x] Utilizar antd para alguns componentes visando facilitar o desenvolvimento;
 
 
 ### Components personalizados
-
 * ButtonCSS
 
 | Nome | Tipo | Descrição |
 | :-------------------: | :------- | :---------------------------------------------------------------------------------------------------------------------------------- |
 | typeCSS | string | parametro de estilo do button |
 | submit | boolean | verificar se o button sera de enviar algo |
-
-
-* CardCSS
-
-| Nome | Tipo | Descrição |
-| :-------------------: | :------- | :---------------------------------------------------------------------------------------------------------------------------------- |
-| favorite | boolean | Caso personagem favoritado pode ter estilo diferente |
-
-
-
 
