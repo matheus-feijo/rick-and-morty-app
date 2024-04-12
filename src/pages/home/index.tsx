@@ -100,7 +100,7 @@ export function Home() {
           {isError && !(isLoading || isRefetching) && (
             <Result
               status="error"
-              title="Erro ao Listar Personagens"
+              title="Não foi possivel listar Personagens"
               subTitle="Por favor tente novamente mais tarde"
             />
           )}

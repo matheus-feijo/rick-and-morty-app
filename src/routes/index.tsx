@@ -28,6 +28,10 @@ export function Routers() {
             Menu: {
               darkItemBg: "#0c1419",
             },
+            Result: {
+              colorTextHeading: "#FFFF",
+              colorTextDescription: "#FFFF",
+            },
           },
         }}
       >
