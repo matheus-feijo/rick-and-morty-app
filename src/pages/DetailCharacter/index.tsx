@@ -1,84 +1,59 @@
 import { useQuery } from "react-query";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { ICharacter } from "../../interfaces/ICharacter";
-import { api } from "../../services/api";
-import { getFavoriteCharactersId } from "../../store/reducers/favoriteCharacterSlice";
-import {
-  ButtonDetailCharacterCSS,
-  ImgDetailCharacter,
-  TextDetailCharacter,
-} from "./styled";
-import moment from "moment";
+import { apiService } from "../../services/api";
+import { Button, Divider, Result, Spin, Typography } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import styles from "./styles.module.css";
 
 export function DetailCharacter() {
   const { id } = useParams();
 
-  const idsFavoriteCharacterList = useSelector(getFavoriteCharactersId);
-
-  const { data, status } = useQuery<ICharacter, unknown>({
-    initialData: undefined,
-    queryKey: "single-character",
-    queryFn: () => api.get(`/character/${id}`).then((res) => res.data),
+  const { data: character, status } = useQuery({
+    queryKey: ["single-character"],
+    queryFn: () => apiService.getUniqueCharacter(parseInt(id || "")),
   });
 
   if (status === "loading" || status === "idle") {
     return (
       <div className={styles["container-loading"]}>
-        <p>Carregando...</p>
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 96 }} spin />} />
       </div>
     );
   } else if (status === "success") {
     return (
       <div>
-        <div style={{ padding: 20 }}>
-          <ButtonDetailCharacterCSS onClick={() => history.go(-1)}>
-            Voltar
-          </ButtonDetailCharacterCSS>
+        <Typography.Title style={{ textAlign: "center", paddingTop: 20 }}>
+          {character.name}
+        </Typography.Title>
+        <Divider />
+
+        <div className={styles["container-info"]}>
+          <img
+            src={character.image}
+            alt={character.name}
+            style={{ borderRadius: "4px" }}
+          />
+
+          <Typography>Especie: {character.species}</Typography>
+          <Typography>Status: {character.status}</Typography>
+          <Typography>Genero: {character.gender}</Typography>
+          <Typography>Episodios: {character.episode.length}</Typography>
         </div>
 
-        <div style={{ textAlign: "center" }}>
-          <ImgDetailCharacter src={data?.image} alt={data?.name} />
-        </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div
-            style={{
-              width: "32vh",
-              display: "flex",
-              flexDirection: "column",
-              gap: 10,
-              padding: 5,
-            }}
-          >
-            <TextDetailCharacter>Nome: {data?.name}</TextDetailCharacter>
-            <TextDetailCharacter>Genero: {data?.gender}</TextDetailCharacter>
-            <TextDetailCharacter>Especie: {data?.species}</TextDetailCharacter>
-            <TextDetailCharacter>Status: {data?.status}</TextDetailCharacter>
-            <TextDetailCharacter>Tipo: {data?.type}</TextDetailCharacter>
-            <TextDetailCharacter>
-              Origem: {data?.origin.name}
-            </TextDetailCharacter>
-            <TextDetailCharacter>
-              Criado em: {moment(data.created).locale("pt-br").format("L")}
-            </TextDetailCharacter>
-
-            <TextDetailCharacter>
-              Favorito:{" "}
-              {idsFavoriteCharacterList.includes(data?.id || -1)
-                ? "True"
-                : "False"}
-            </TextDetailCharacter>
-          </div>
+        <div className={styles["container-info"]} style={{ paddingTop: 20 }}>
+          <Button onClick={() => history.go(-1)}>Voltar</Button>
         </div>
       </div>
     );
   } else {
     return (
       <div style={{ padding: "20px 0px 0px 20px" }}>
-        <ButtonDetailCharacterCSS onClick={() => history.go(-1)}>
-          Voltar
-        </ButtonDetailCharacterCSS>
+        <Result
+          status="error"
+          title="Erro ao Buscar informaçoes do Personagem"
+          subTitle="Por favor tente novamente mais tarde"
+          extra={<Button onClick={() => history.go(-1)}>Voltar</Button>}
+        />
       </div>
     );
   }

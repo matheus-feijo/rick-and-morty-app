@@ -17,7 +17,13 @@ export function TheHeader() {
           <Menu
             theme="dark"
             mode="horizontal"
-            selectedKeys={menuSelected === "/" ? ["0"] : ["1"]}
+            selectedKeys={
+              menuSelected === "/"
+                ? ["0"]
+                : menuSelected === "/favoritos"
+                ? ["1"]
+                : ["0"]
+            }
             items={[
               {
                 key: 0,

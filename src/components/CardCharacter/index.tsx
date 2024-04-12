@@ -2,6 +2,7 @@ import { Card } from "antd";
 import { ButtonCSS } from "../ButtonCSS";
 import { Heart } from "@phosphor-icons/react";
 import { ICharacter } from "../../interfaces/ICharacter";
+import { useNavigate } from "react-router-dom";
 
 export function CardCharacter({
   character,
@@ -12,13 +13,21 @@ export function CardCharacter({
   favoritesCharacters: ICharacter[];
   handleChange: (character: ICharacter) => void;
 }) {
+  const navigate = useNavigate();
+
   return (
     <>
       <Card
         key={character.id}
         hoverable
         style={{ width: 240 }}
-        cover={<img alt={character.name} src={character.image} />}
+        cover={
+          <img
+            alt={character.name}
+            src={character.image}
+            onClick={() => navigate(`/character/${character.id}`)}
+          />
+        }
       >
         <Card.Meta
           title={character.name}
