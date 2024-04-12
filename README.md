@@ -18,6 +18,8 @@ npm run dev
 npm run test
 ```
 
+* Documentação API: https://rickandmortyapi.com/documentation
+
 ### Requisitos Funcionais
  - [x] Deve ser possivel listar todos os personagens;
  - [x] Deve ser possivel favoritar personagens;
