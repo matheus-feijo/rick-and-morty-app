@@ -29,7 +29,7 @@ export function Favorites() {
       <Typography.Title level={1} style={{ color: "#FFFF" }}>
         Favoritos
       </Typography.Title>
-      <Divider />
+      <Divider style={{ backgroundColor: "#FFFF", opacity: 0.2 }} />
 
       <div style={{ paddingBottom: 40, paddingLeft: 40 }}>
         <div

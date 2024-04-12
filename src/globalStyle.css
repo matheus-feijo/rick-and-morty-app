@@ -12,3 +12,11 @@ body{
     background-attachment: fixed;
 }
 
+
+@media screen and (max-width:500px) {
+    body{
+        background-color: #101920;
+        background-image: none;
+    }
+}
+

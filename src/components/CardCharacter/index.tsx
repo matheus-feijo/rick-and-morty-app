@@ -3,6 +3,7 @@ import { ButtonCSS } from "../ButtonCSS";
 import { Heart } from "@phosphor-icons/react";
 import { ICharacter } from "../../interfaces/ICharacter";
 import { useNavigate } from "react-router-dom";
+import styles from "./style.module.css";
 
 export function CardCharacter({
   character,
@@ -20,7 +21,7 @@ export function CardCharacter({
       <Card
         key={character.id}
         hoverable
-        style={{ width: 240 }}
+        className={styles["card-container"]}
         cover={
           <img
             alt={character.name}

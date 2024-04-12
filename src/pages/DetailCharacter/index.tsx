@@ -27,7 +27,7 @@ export function DetailCharacter() {
         >
           {character.name}
         </Typography.Title>
-        <Divider />
+        <Divider style={{ backgroundColor: "#FFFF", opacity: 0.2 }} />
 
         <div className={styles["container-info"]}>
           <img
