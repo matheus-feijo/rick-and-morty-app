@@ -1,17 +1,12 @@
-import { Heart } from "@phosphor-icons/react";
 import { ICharacter } from "../../interfaces/ICharacter";
-import { useNavigate } from "react-router-dom";
-import { TitlePage } from "./styled";
-import { ButtonCSS } from "../../components/ButtonCSS";
 import { useCharacter } from "../../hooks/useCharacter";
-import { Card, Divider, Typography } from "antd";
+import { Divider, Typography } from "antd";
 import { useNotify } from "../../hooks/useNotify";
+import { CardCharacter } from "../../components/CardCharacter";
 
 export function Favorites() {
   const { personagensFavoritos, removerFavorito } = useCharacter();
   const { contextholderNotification, openNotification } = useNotify();
-  const navigate = useNavigate();
-
   const handleRemoveCharacter = (character: ICharacter) => {
     removerFavorito(character.id);
     openNotification({
@@ -45,31 +40,12 @@ export function Favorites() {
         >
           {personagensFavoritos.map((character) => {
             return (
-              <Card
+              <CardCharacter
                 key={character.id}
-                hoverable
-                style={{ width: 240 }}
-                cover={<img alt={character.name} src={character.image} />}
-              >
-                <Card.Meta
-                  title={character.name}
-                  description={
-                    <ButtonCSS onClick={() => handleRemoveCharacter(character)}>
-                      <Heart
-                        size={32}
-                        color="#b4211f"
-                        weight={
-                          personagensFavoritos.find(
-                            (value) => value.id === character.id
-                          )
-                            ? "fill"
-                            : "regular"
-                        }
-                      />
-                    </ButtonCSS>
-                  }
-                />
-              </Card>
+                character={character}
+                favoritesCharacters={personagensFavoritos}
+                handleChange={handleRemoveCharacter}
+              />
             );
           })}
         </div>

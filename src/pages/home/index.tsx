@@ -1,16 +1,15 @@
 import { useQuery } from "react-query";
 import logo from "../../assets/rick-and-morty.png";
 import { apiService } from "../../services/api";
-import { Button, Card, Divider, Pagination, Result, Spin } from "antd";
-import { HeartOutlined, LoadingOutlined } from "@ant-design/icons";
+import { Divider, Pagination, Result, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import { useNotify } from "../../hooks/useNotify";
 import { useCharacter } from "../../hooks/useCharacter";
 import { ICharacter } from "../../interfaces/ICharacter";
-import { Heart } from "@phosphor-icons/react";
-import { ButtonCSS } from "../../components/ButtonCSS";
 import { useEffect, useState } from "react";
 import { Filtro } from "./components/Filtro";
 import styles from "./styles.module.css";
+import { CardCharacter } from "../../components/CardCharacter";
 
 export function Home() {
   const { contextholderNotification, openNotification } = useNotify();
@@ -133,35 +132,12 @@ export function Home() {
                 >
                   {personagens.items.results.map((character) => {
                     return (
-                      <Card
+                      <CardCharacter
                         key={character.id}
-                        hoverable
-                        style={{ width: 240 }}
-                        cover={
-                          <img alt={character.name} src={character.image} />
-                        }
-                      >
-                        <Card.Meta
-                          title={character.name}
-                          description={
-                            <ButtonCSS
-                              onClick={() => handleChangeFavorite(character)}
-                            >
-                              <Heart
-                                size={32}
-                                color="#b4211f"
-                                weight={
-                                  personagensFavoritos.find(
-                                    (value) => value.id === character.id
-                                  )
-                                    ? "fill"
-                                    : "regular"
-                                }
-                              />
-                            </ButtonCSS>
-                          }
-                        />
-                      </Card>
+                        character={character}
+                        favoritesCharacters={personagensFavoritos}
+                        handleChange={handleChangeFavorite}
+                      />
                     );
                   })}
                 </div>
