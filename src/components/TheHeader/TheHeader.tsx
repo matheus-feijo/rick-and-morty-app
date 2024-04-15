@@ -31,9 +31,8 @@ export function TheHeader() {
             {
               key: 1,
               label: "Favoritos",
-              title: "Favoritos",
               onClick: () => navigate("/favoritos"),
-              icon: <HeartOutlined />,
+              // icon: <HomeOutlined />,
             },
           ]}
           style={{ flex: 1, minWidth: 0 }}
