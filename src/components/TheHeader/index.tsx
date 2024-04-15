@@ -15,7 +15,7 @@ export function TheHeader() {
             ? ["0"]
             : menuSelected === "/favoritos"
             ? ["1"]
-            : ["0"]
+            : [""]
         }
         items={[
           {
