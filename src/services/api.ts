@@ -4,6 +4,7 @@ import { ICharacter } from "../interfaces/ICharacter";
 
 export const api = axios.create({
   baseURL: "https://rickandmortyapi.com/api",
+  timeout: 1000,
 });
 
 export const apiService = {

@@ -34,10 +34,18 @@ export function Home() {
     isRefetching,
   } = useQuery({
     queryFn: () => apiService.getAllCharacter(params),
+
     queryKey: ["CHARACTER_ALL"],
     onSuccess: (data) => {
       // console.log(data);
       adicionarPersonagens(data);
+    },
+
+    onError: (error: any) => {
+      openNotification({
+        type: "info",
+        message: error.response.data.error,
+      });
     },
   });
 
@@ -75,7 +83,7 @@ export function Home() {
 
   useEffect(() => {
     // console.log("opa");
-    refetch();
+    refetch({ cancelRefetch: true });
   }, [params]);
 
   return (
