@@ -3,6 +3,7 @@ import { useCharacter } from "../../hooks/useCharacter";
 import { Divider, Typography } from "antd";
 import { useNotify } from "../../hooks/useNotify";
 import { CardCharacter } from "../../components/CardCharacter";
+import styles from "./style.module.css";
 
 export function Favorites() {
   const { personagensFavoritos, removerFavorito } = useCharacter();
@@ -16,30 +17,15 @@ export function Favorites() {
   };
 
   return (
-    <div
-      style={{
-        padding: 20,
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        height: "90vh",
-      }}
-    >
+    <div className={styles.container}>
       {contextholderNotification}
       <Typography.Title level={1} style={{ color: "#FFFF" }}>
         Favoritos
       </Typography.Title>
       <Divider style={{ backgroundColor: "#FFFF", opacity: 0.2 }} />
 
-      <div style={{ paddingBottom: 40, paddingLeft: 40 }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "start",
-            gap: 10,
-            flexWrap: "wrap",
-          }}
-        >
+      <div className={styles["container-success"]}>
+        <div className={styles["container-content-card"]}>
           {personagensFavoritos.map((character) => {
             return (
               <CardCharacter

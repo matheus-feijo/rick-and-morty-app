@@ -120,16 +120,9 @@ export function Home() {
           )}
 
           {isSuccess && !isRefetching && (
-            <div style={{ paddingBottom: 40, paddingLeft: 40 }}>
+            <div className={styles["container-success"]}>
               {isFetched && !isError && (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "start",
-                    gap: 10,
-                    flexWrap: "wrap",
-                  }}
-                >
+                <div className={styles["container-content-card"]}>
                   {personagens.items.results.map((character) => {
                     return (
                       <CardCharacter

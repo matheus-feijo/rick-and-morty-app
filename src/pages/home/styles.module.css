@@ -29,9 +29,25 @@
     height: 100px;
 }
 
+.container-content-card{
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.container-success{
+    padding-bottom: 40px;
+    padding-left: 40px;
+}
+
 @media screen and (max-width:500px) {
     .imagem-titulo{
         width: 300px;
         height: 80px;
+    }
+
+    .container-success{
+        padding: 0px 50px;
     }
 }
