@@ -1,11 +1,4 @@
-import {
-  Button,
-  Input,
-  Radio,
-  RadioChangeEvent,
-  Tooltip,
-  Typography,
-} from "antd";
+import { Button, Checkbox, Input, Tooltip, Typography } from "antd";
 import { useState } from "react";
 import styles from "./style.module.css";
 import { CloseOutlined } from "@ant-design/icons";
@@ -43,44 +36,45 @@ export function Filtro({
     restartPageSelected();
   };
 
-  const handleChangeGender = (e: RadioChangeEvent) => {
-    const { value } = e.target;
+  const handleChangeGender = (checkedValue: Gender[]) => {
+    const selectedGender = checkedValue[checkedValue.length - 1];
+
     const newParams = new URLSearchParams(params);
     newParams.delete("page");
     newParams.delete("gender");
-
     newParams.append("page", "1");
-    newParams.append("gender", value);
-    setParams(newParams.toString());
 
-    if (value === genderSelected) {
+    if (checkedValue.length === 0) {
+      setParams(newParams.toString());
       setGenderSelected("");
       restartPageSelected();
       return;
     }
 
-    setGenderSelected(value);
+    newParams.append("gender", selectedGender);
+    setParams(newParams.toString());
+    setGenderSelected(selectedGender);
     restartPageSelected();
   };
 
-  const handleChangeStatus = (e: RadioChangeEvent) => {
-    const { value } = e.target;
+  const handleChangeStatus = (checkedValue: Status[]) => {
+    const selectedStatus = checkedValue[checkedValue.length - 1];
+
     const newParams = new URLSearchParams(params);
     newParams.delete("page");
     newParams.delete("status");
-
     newParams.append("page", "1");
-    newParams.append("status", value);
-    setParams(newParams.toString());
 
-    if (value === genderSelected) {
+    if (checkedValue.length === 0) {
+      setParams(newParams.toString());
       setStatusSelected("");
       restartPageSelected();
       return;
     }
 
-    setStatusSelected(value);
-
+    newParams.append("status", selectedStatus);
+    setParams(newParams.toString());
+    setStatusSelected(selectedStatus);
     restartPageSelected();
   };
 
@@ -138,38 +132,44 @@ export function Filtro({
         </div>
         <div className={styles["content-filtro"]}>
           <Typography style={{ color: "#FFFF", width: "50px" }}>
-            Genero:
+            Gênero:
           </Typography>
-          <Radio.Group onChange={handleChangeGender} value={genderSelected}>
-            <Radio value={"female"} style={{ color: "#FFFF" }}>
-              Female
-            </Radio>
-            <Radio value={"male"} style={{ color: "#FFFF" }}>
-              Male
-            </Radio>
-            <Radio value={"genderless"} style={{ color: "#FFFF" }}>
-              genderless
-            </Radio>
-            <Radio value={"unknown"} style={{ color: "#FFFF" }}>
-              unknown
-            </Radio>
-          </Radio.Group>
+          <Checkbox.Group
+            onChange={handleChangeGender}
+            value={[genderSelected]}
+          >
+            <Checkbox value={"female"} style={{ color: "#FFFF" }}>
+              Femêa
+            </Checkbox>
+            <Checkbox value={"male"} style={{ color: "#FFFF" }}>
+              Macho
+            </Checkbox>
+            <Checkbox value={"genderless"} style={{ color: "#FFFF" }}>
+              sem gênero
+            </Checkbox>
+            <Checkbox value={"unknown"} style={{ color: "#FFFF" }}>
+              Desconhecido
+            </Checkbox>
+          </Checkbox.Group>
         </div>
         <div className={styles["content-filtro"]}>
           <Typography style={{ color: "#FFFF", width: "50px" }}>
             Status:
           </Typography>
-          <Radio.Group onChange={handleChangeStatus} value={statusSelected}>
-            <Radio value={"alive"} style={{ color: "#FFFF" }}>
-              Alive
-            </Radio>
-            <Radio value={"dead"} style={{ color: "#FFFF" }}>
-              Dead
-            </Radio>
-            <Radio value={"unknown"} style={{ color: "#FFFF" }}>
-              unknown
-            </Radio>
-          </Radio.Group>
+          <Checkbox.Group
+            onChange={handleChangeStatus}
+            value={[statusSelected]}
+          >
+            <Checkbox value={"alive"} style={{ color: "#FFFF" }}>
+              Vivo
+            </Checkbox>
+            <Checkbox value={"dead"} style={{ color: "#FFFF" }}>
+              Morto
+            </Checkbox>
+            <Checkbox value={"unknown"} style={{ color: "#FFFF" }}>
+              Desconhecido
+            </Checkbox>
+          </Checkbox.Group>
         </div>
       </div>
     </>

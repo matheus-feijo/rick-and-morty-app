@@ -11,6 +11,7 @@ export function DetailCharacter() {
   const { data: character, status } = useQuery({
     queryKey: ["single-character"],
     queryFn: () => apiService.getUniqueCharacter(parseInt(id || "")),
+    cacheTime: 0,
   });
 
   if (status === "loading" || status === "idle") {
